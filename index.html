@@ -26,85 +26,96 @@
     /* Hero 区 */
     .hero {
       background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      color: white;
-      padding: 60px 20px 100px;
+      color: white; padding: 60px 20px 100px;
     }
 
     .hero-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      align-items: flex-start;
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;
     }
 
     /* 左侧介绍 */
     .hero-intro { flex: 1.2; min-width: 320px; }
     .hero-intro h1 { font-size: 2.2rem; margin: 0; font-weight: 800; }
-    .hero-intro p { 
-      font-size: 1.25rem; 
-      line-height: 1.8; 
-      opacity: 0.95; 
-      margin: 20px 0 0; 
-    }
+    .hero-intro p { font-size: 1.25rem; line-height: 1.8; opacity: 0.95; margin: 20px 0 0; }
 
-    /* 右侧：更新动态卡片 (模仿您提供的紫色风格) */
+    /* 联系方式样式 */
+    .contact-bar { display: flex; gap: 12px; margin-top: 25px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 8px; padding: 8px 18px;
+      border-radius: 50px; background: rgba(255, 255, 255, 0.15);
+      color: white; text-decoration: none; font-size: 0.9rem;
+      transition: 0.3s; border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+    }
+    .contact-item:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+    /* 右侧动态卡片 (固定高度 220px) */
     .hero-progress {
-      flex: 0.8; min-width: 320px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      padding: 24px; border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      flex: 0.8; min-width: 320px; height: 220px;
+      background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      padding: 20px 24px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; flex-direction: column;
     }
 
     .update-header {
-      display: flex; justify-content: space-between; align-items: baseline;
-      margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.15);
-      padding-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 8px;
+    }
+    .tabs-left { display: flex; gap: 15px; }
+    .tab-btn {
+      background: none; border: none; color: white; opacity: 0.6; cursor: pointer;
+      font-size: 0.9rem; font-weight: 600; padding: 2px 0; transition: 0.3s;
+    }
+    .tab-btn.active { opacity: 1; border-bottom: 2px solid var(--accent); }
+    #display-date { font-size: 0.75rem; opacity: 0.8; font-family: monospace; }
+
+    .scroll-container { flex: 1; overflow-y: auto; padding-right: 5px; }
+    .scroll-container::-webkit-scrollbar { width: 3px; }
+    .scroll-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+    .update-list { display: flex; flex-direction: column; gap: 10px; }
+    .update-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; line-height: 1.5; color: white; }
+    .update-item::before { content: "•"; color: var(--accent); font-weight: bold; }
+
+    .history-footer { margin-top: 10px; padding-top: 5px; text-align: right; }
+    .history-link { color: white; opacity: 0.6; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
+    .history-link:hover { opacity: 1; text-decoration: underline; }
+
+    /* 弹窗核心样式 */
+    #history-modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 1000;
+      justify-content: center; align-items: center;
+    }
+    .modal-content {
+      background: white; color: var(--text-main); padding: 30px; border-radius: 24px;
+      width: 90%; max-width: 480px; max-height: 75vh; overflow-y: auto; position: relative;
+    }
+    .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-muted); }
+
+    .email-display-box { text-align: center; padding: 10px 0; }
+    .email-address {
+      font-size: 1.15rem; color: var(--primary); background: #f0f2ff;
+      padding: 12px 15px; border-radius: 12px; display: inline-block;
+      margin: 15px 0; font-family: monospace; border: 1px dashed var(--primary);
     }
 
-    .update-header h2 { margin: 0; font-size: 1.1rem; letter-spacing: 0.5px; }
-    #update-date { font-size: 0.8rem; opacity: 0.8; font-family: monospace; }
-
-    .update-list { display: flex; flex-direction: column; gap: 14px; }
-    .update-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 0.95rem; line-height: 1.5;
-    }
-
-    /* 列表点装饰 */
-    .update-item::before {
-      content: "•"; color: var(--accent); font-weight: bold; font-size: 1.2rem;
-      line-height: 1.4;
-    }
-
-    /* 下方卡片区 */
+    /* 下方展示卡片 */
     .main-content { max-width: 1100px; margin: -50px auto 60px; padding: 0 20px; }
-    .card-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-      gap: 24px; 
-    }
-    
-    .card {
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .card { 
       background: var(--card-bg); padding: 30px; border-radius: var(--radius);
       border: 1px solid var(--border); text-decoration: none; color: inherit;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.3s ease;
-      display: flex; flex-direction: column;
+      transition: all 0.3s ease; display: flex; flex-direction: column; 
     }
     .card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
     .card h3 { margin: 15px 0 10px; font-size: 1.3rem; color: var(--primary); }
-    .card p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; flex-grow: 1; }
+    .card p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
     footer { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 0.9rem; }
 
-    @media (max-width: 768px) {
-      .hero-intro { text-align: center; }
-      .main-content { margin-top: 30px; }
-    }
+    @media (max-width: 768px) { .hero-container { flex-direction: column; } .contact-bar { justify-content: center; } .hero-intro { text-align: center; } }
   </style>
 </head>
 <body>
@@ -113,81 +124,143 @@
     <div class="hero-container">
       <div class="hero-intro">
         <h1>Elena's Space ✨</h1>
-        <p>
-          欢迎来到我的个人主页。这里主要记录我的课程学习、算法题解、论文研读、项目实践与阅读思考中的系统化笔记。
-        </p>
+        <p>欢迎来到我的个人主页。这里主要记录我的课程学习、算法题解、论文研读、项目实践与阅读思考中的系统化笔记。</p>
+        
+        <div class="contact-bar">
+          <a href="https://github.com/elenashaw" target="_blank" class="contact-item">Github</a>
+          <a onclick="openEmailModal()" class="contact-item">Email</a>
+          <a href="https://your-blog-or-sns.com" target="_blank" class="contact-item">Blog</a>
+        </div>
       </div>
 
       <div class="hero-progress">
         <div class="update-header">
-          <h2>🚧 板块更新信息</h2>
-          <span id="update-date">Loading...</span>
-        </div>
-        <div id="status-container" class="update-list">
+          <div class="tabs-left">
+            <button class="tab-btn active" id="btn-log" onclick="switchTab('log')">最近更新</button>
+            <button class="tab-btn" id="btn-plan" onclick="switchTab('plan')">维护计划</button>
           </div>
+          <span id="display-date">Loading...</span>
+        </div>
+        <div class="scroll-container">
+          <div id="content-list" class="update-list"></div>
+        </div>
+        <div class="history-footer">
+          <a class="history-link" id="history-entry" onclick="handleHistoryClick()">📜 查看历史足迹 →</a>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="main-content">
     <div class="card-grid">
-      <a href="/course/" class="card">
-        <div style="font-size: 2.2rem;">📚</div>
-        <h3>课程笔记</h3>
-        <p>涵盖数学、机械、能源动力、计算机与德语学习等方向的系统化笔记。</p>
-      </a>
-
-      <a href="/course/leetcode/index.html" class="card">
-        <div style="font-size: 2.2rem;">💡</div>
-        <h3>LeetCode</h3>
-        <p>围绕典型题型整理的算法模型与解题范式。</p>
-      </a>
-
-      <a href="/course/papers/index.html" class="card">
-        <div style="font-size: 2.2rem;">📄</div>
-        <h3>论文知识库</h3>
-        <p>聚焦深度学习领域论文研读，重点整理核心逻辑、关键公式拆解与实验复现心得，并构建词条库。</p>
-      </a>
-
-      <a href="/course/projects/index.html" class="card">
-        <div style="font-size: 2.2rem;">🛠️</div>
-        <h3>项目实践</h3>
-        <p>记录个人参与的科研项目、开发实践及技术原型，侧重于解决问题的思路与技术架构实现。</p>
-      </a>
-
-      <a href="/course/reading/index.html" class="card">
-        <div style="font-size: 2.2rem;">✍️</div>
-        <h3>阅读手记</h3>
-        <p>记录技术、人文以及其他领域书籍的阅读摘录与个人思考。</p>
-      </a>
+      <a href="/course/" class="card"><div style="font-size: 2.2rem;">📚</div><h3>课程笔记</h3><p>涵盖数学、机械、能源动力、计算机与德语学习等方向的系统化笔记。</p></a>
+      <a href="/course/leetcode/index.html" class="card"><div style="font-size: 2.2rem;">💡</div><h3>LeetCode</h3><p>围绕典型题型整理的算法模型与解题范式。</p></a>
+      <a href="/course/papers/index.html" class="card"><div style="font-size: 2.2rem;">📄</div><h3>论文知识库</h3><p>聚焦深度学习领域论文研读，重点整理核心逻辑、关键公式拆解与实验复现心得。</p></a>
+      <a href="/course/projects/index.html" class="card"><div style="font-size: 2.2rem;">🛠️</div><h3>项目实践</h3><p>记录个人参与的科研项目、开发实践及技术原型，侧重于思路与实现。</p></a>
+      <a href="/course/reading/index.html" class="card"><div style="font-size: 2.2rem;">✍️</div><h3>阅读手记</h3><p>记录技术、人文以及其他领域书籍的阅读摘录与个人思考。</p></a>
     </div>
   </main>
 
-  <footer>
-    © 2025 · Elena · Built with ❤️ & 💻
-  </footer>
+  <div id="history-modal" onclick="closeHistory()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-modal" onclick="closeHistory()">×</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer>© 2025 · Elena · Built with ❤️ & 💻</footer>
 
   <script src="./update.js"></script>
-  
+  <script src="./current.js"></script>
+
   <script>
-    window.onload = function() {
-      const container = document.getElementById('status-container');
-      const dateLabel = document.getElementById('update-date');
-      
-      if (window.updateInfo && window.updateInfo.logs) {
-        // 渲染日期
-        dateLabel.innerText = "Updated: " + window.updateInfo.date;
-        
-        // 渲染日志列表
-        container.innerHTML = window.updateInfo.logs.map(log => `
-          <div class="update-item">
-            <span>${log}</span>
+    let currentTab = 'log';
+
+    function switchTab(type) {
+      currentTab = type;
+      document.getElementById('btn-log').classList.toggle('active', type === 'log');
+      document.getElementById('btn-plan').classList.toggle('active', type === 'plan');
+      // 两个标签页现在都显示历史入口
+      document.getElementById('history-entry').style.visibility = 'visible';
+      renderContent();
+    }
+
+    function renderContent() {
+      const listContainer = document.getElementById('content-list');
+      const dateLabel = document.getElementById('display-date');
+      if (currentTab === 'log' && window.siteHistory) {
+        const data = window.siteHistory[0];
+        dateLabel.innerText = data.date;
+        listContainer.innerHTML = data.logs.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+      } else if (currentTab === 'plan' && window.maintenancePlans) {
+        const data = window.maintenancePlans[0];
+        dateLabel.innerText = data.date;
+        listContainer.innerHTML = data.plans.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+      }
+    }
+
+    // 根据当前标签页判断打开哪种历史
+    function handleHistoryClick() {
+      if (currentTab === 'log') {
+        openHistory();
+      } else {
+        openPlanHistory();
+      }
+    }
+
+    // 更新历史弹窗
+    function openHistory() {
+      const modal = document.getElementById('history-modal');
+      const body = document.getElementById('modal-body');
+      modal.style.display = 'flex';
+      body.innerHTML = `<h2 style="color:var(--primary); margin-top:0;">🕰️ 历史足迹归档</h2>` + 
+        window.siteHistory.map(entry => `
+          <div style="margin-bottom:18px; border-bottom:1px solid #eee; padding-bottom:10px;">
+            <div style="font-weight:bold; color:var(--text-muted); font-size:0.8rem;">${entry.date}</div>
+            <ul style="padding-left:20px; margin:5px 0; font-size:0.95rem; line-height:1.6;">
+              ${entry.logs.map(log => `<li>${log}</li>`).join('')}
+            </ul>
           </div>
         `).join('');
-      } else {
-        container.innerHTML = "<p style='font-size:0.85rem;'>更新数据读取中...</p>";
-      }
-    };
+    }
+
+    // 计划历史弹窗
+    function openPlanHistory() {
+      const modal = document.getElementById('history-modal');
+      const body = document.getElementById('modal-body');
+      modal.style.display = 'flex';
+      body.innerHTML = `<h2 style="color:var(--primary); margin-top:0;">📅 维护计划回顾</h2>` + 
+        window.maintenancePlans.map(entry => `
+          <div style="margin-bottom:18px; border-bottom:1px solid #eee; padding-bottom:10px;">
+            <div style="font-weight:bold; color:var(--text-muted); font-size:0.8rem;">发布日期：${entry.date}</div>
+            <ul style="padding-left:20px; margin:5px 0; font-size:0.95rem; line-height:1.6;">
+              ${entry.plans.map(plan => `<li>${plan}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('');
+    }
+
+    // Email 专用美化弹窗
+    function openEmailModal() {
+      const modal = document.getElementById('history-modal');
+      const body = document.getElementById('modal-body');
+      modal.style.display = 'flex';
+      body.innerHTML = `
+        <div class="email-display-box">
+          <div style="font-size: 3rem; margin-bottom: 10px;">✉️</div>
+          <h3 style="margin: 0; color: var(--text-main);">联系我的邮箱</h3>
+          <div class="email-address">eleadrwhitmore@gmail.com</div>
+          <p style="color:var(--text-muted); font-size:0.85rem;">欢迎通过邮件与我交流合作或探讨学术问题</p>
+          <button onclick="closeHistory()" style="margin-top:15px; background:var(--primary); color:white; border:none; padding:10px 30px; border-radius:50px; cursor:pointer;">好 的</button>
+        </div>
+      `;
+    }
+
+    function closeHistory() {
+      document.getElementById('history-modal').style.display = 'none';
+    }
+
+    window.onload = renderContent;
   </script>
 </body>
 </html>
