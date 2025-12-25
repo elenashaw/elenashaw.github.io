@@ -50,7 +50,12 @@
     }
     .contact-item:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
 
-    /* 右侧动态卡片 (固定高度 220px) */
+    /* 语录容器占位样式 */
+    #hitokoto-container {
+      min-height: 80px; /* 预留空间减少抖动 */
+    }
+
+    /* 右侧动态卡片 */
     .hero-progress {
       flex: 0.8; min-width: 320px; height: 220px;
       background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -131,6 +136,7 @@
           <a onclick="openEmailModal()" class="contact-item">Email</a>
           <a href="https://your-blog-or-sns.com" target="_blank" class="contact-item">Blog</a>
         </div>
+        <div id="hitokoto-container"></div>
       </div>
 
       <div class="hero-progress">
@@ -156,7 +162,7 @@
       <a href="https://elenashaw.github.io/course/" target="_blank" class="card">
         <div style="font-size: 2.2rem;">📚</div>
         <h3>课程笔记</h3>
-        <p>涵盖数学、机械、能源动力、计算机与德语学习等方向的系统化笔记。</p>
+        <p>涵盖计算机、数学、机械与能源动力，以及语言学习等方向的系统化笔记。</p>
       </a>
       <a href="/course/leetcode/index.html" class="card"><div style="font-size: 2.2rem;">💡</div><h3>LeetCode</h3><p>围绕典型题型整理的算法模型与解题范式。</p></a>
       <a href="/course/papers/index.html" class="card"><div style="font-size: 2.2rem;">📄</div><h3>论文知识库</h3><p>聚焦深度学习领域论文研读，重点整理核心逻辑、关键公式拆解与实验复现心得。</p></a>
@@ -176,60 +182,46 @@
 
   <script src="./update.js"></script>
   <script src="./current.js"></script>
-
-  <script>
+  <script src="./quotes.js"></script> <script>
     let currentTab = 'log';
 
     function switchTab(type) {
       currentTab = type;
-      document.getElementById('btn-log').classList.toggle('active', type === 'log');
-      document.getElementById('btn-plan').classList.toggle('active', type === 'plan');
-      // 两个标签页现在都显示历史入口
-      document.getElementById('history-entry').style.visibility = 'visible';
+      const btnLog = document.getElementById('btn-log');
+      const btnPlan = document.getElementById('btn-plan');
+      if(btnLog) btnLog.classList.toggle('active', type === 'log');
+      if(btnPlan) btnPlan.classList.toggle('active', type === 'plan');
       renderContent();
     }
 
     function renderContent() {
       const listContainer = document.getElementById('content-list');
       const dateLabel = document.getElementById('display-date');
+      if (!listContainer || !dateLabel) return;
       
-      // 1. 安全检查：确保数据已加载
       const historyData = (window.siteHistory && window.siteHistory.length > 0) ? window.siteHistory[0] : null;
       const planData = (window.maintenancePlans && window.maintenancePlans.length > 0) ? window.maintenancePlans[0] : null;
 
-      if (currentTab === 'log') {
-        if (historyData) {
+      if (currentTab === 'log' && historyData) {
           dateLabel.innerText = historyData.date;
-          // 兼容性处理：优先读 logs 字段
-          const items = historyData.logs || historyData.plans || [];
-          listContainer.innerHTML = items.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
-        }
-      } else if (currentTab === 'plan') {
-        if (planData) {
+          listContainer.innerHTML = historyData.logs.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+      } else if (currentTab === 'plan' && planData) {
           dateLabel.innerText = planData.date;
-          // 兼容性处理：优先读 plans 字段
-          const items = planData.plans || planData.logs || [];
-          listContainer.innerHTML = items.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
-        }
+          listContainer.innerHTML = planData.plans.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
       }
     }
 
-    // 根据当前标签页判断打开哪种历史
     function handleHistoryClick() {
-      if (currentTab === 'log') {
-        openHistory();
-      } else {
-        openPlanHistory();
-      }
+      if (currentTab === 'log') { openHistory(); } else { openPlanHistory(); }
     }
 
-    // 更新历史弹窗
     function openHistory() {
       const modal = document.getElementById('history-modal');
       const body = document.getElementById('modal-body');
+      if(!modal || !body) return;
       modal.style.display = 'flex';
       body.innerHTML = `<h2 style="color:var(--primary); margin-top:0;">🕰️ 历史足迹归档</h2>` + 
-        window.siteHistory.map(entry => `
+        (window.siteHistory || []).map(entry => `
           <div style="margin-bottom:18px; border-bottom:1px solid #eee; padding-bottom:10px;">
             <div style="font-weight:bold; color:var(--text-muted); font-size:0.8rem;">${entry.date}</div>
             <ul style="padding-left:20px; margin:5px 0; font-size:0.95rem; line-height:1.6;">
@@ -239,13 +231,13 @@
         `).join('');
     }
 
-    // 计划历史弹窗
     function openPlanHistory() {
       const modal = document.getElementById('history-modal');
       const body = document.getElementById('modal-body');
+      if(!modal || !body) return;
       modal.style.display = 'flex';
       body.innerHTML = `<h2 style="color:var(--primary); margin-top:0;">📅 维护计划回顾</h2>` + 
-        window.maintenancePlans.map(entry => `
+        (window.maintenancePlans || []).map(entry => `
           <div style="margin-bottom:18px; border-bottom:1px solid #eee; padding-bottom:10px;">
             <div style="font-weight:bold; color:var(--text-muted); font-size:0.8rem;">发布日期：${entry.date}</div>
             <ul style="padding-left:20px; margin:5px 0; font-size:0.95rem; line-height:1.6;">
@@ -255,10 +247,10 @@
         `).join('');
     }
 
-    // Email 专用美化弹窗
     function openEmailModal() {
       const modal = document.getElementById('history-modal');
       const body = document.getElementById('modal-body');
+      if(!modal || !body) return;
       modal.style.display = 'flex';
       body.innerHTML = `
         <div class="email-display-box">
@@ -272,10 +264,27 @@
     }
 
     function closeHistory() {
-      document.getElementById('history-modal').style.display = 'none';
+      const modal = document.getElementById('history-modal');
+      if(modal) modal.style.display = 'none';
     }
 
-    window.onload = renderContent;
+    // 初始化加载
+    window.addEventListener('load', () => {
+      // 执行日志渲染
+      renderContent();
+      
+      // 执行名言加载
+      if (typeof loadHitokoto === 'function') {
+        loadHitokoto();
+      } else {
+        console.warn("未能检测到 loadHitokoto 函数，请确保 quotes.js 路径正确并已保存。");
+        // 自动降级：如果在本地 file 协议运行，提醒用户
+        if(window.location.protocol === 'file:') {
+            const container = document.getElementById('hitokoto-container');
+            if(container) container.innerHTML = '<div style="font-size:0.8rem; opacity:0.5; margin-top:20px;">(本地预览限制，语录功能需在服务器环境查看)</div>';
+        }
+      }
+    });
   </script>
 </body>
 </html>
