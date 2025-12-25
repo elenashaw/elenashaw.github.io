@@ -50,7 +50,7 @@
     }
     .contact-item:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
 
-    /* 纯净的名言挂载点：样式由 js/quote.js 注入，此处不设背景或边框 */
+    /* 名言挂载点 - 纯净无样式 */
     #hitokoto-container {
       display: none; 
       min-height: 50px;
@@ -182,9 +182,9 @@
 
   <footer>© 2025 · Elena · Built with ❤️ & 💻</footer>
 
-  <script src="./js/update.js"></script>
-  <script src="./js/current.js"></script>
-  <script src="./js/quote.js"></script>
+  <script src="./js/update.js?v=20251225"></script>
+  <script src="./js/current.js?v=20251225"></script>
+  <script src="./js/quote.js?v=20251225"></script>
 
   <script>
     let currentTab = 'log';
@@ -198,10 +198,11 @@
       renderContent();
     }
 
+    // 渲染函数：增加了成功检测
     function renderContent() {
       const listContainer = document.getElementById('content-list');
       const dateLabel = document.getElementById('display-date');
-      if (!listContainer || !dateLabel) return;
+      if (!listContainer || !dateLabel) return false;
       
       const historyData = (window.siteHistory && window.siteHistory.length > 0) ? window.siteHistory[0] : null;
       const planData = (window.maintenancePlans && window.maintenancePlans.length > 0) ? window.maintenancePlans[0] : null;
@@ -209,10 +210,13 @@
       if (currentTab === 'log' && historyData) {
           dateLabel.innerText = historyData.date;
           listContainer.innerHTML = historyData.logs.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+          return true;
       } else if (currentTab === 'plan' && planData) {
           dateLabel.innerText = planData.date;
           listContainer.innerHTML = planData.plans.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+          return true;
       }
+      return false;
     }
 
     function handleHistoryClick() {
@@ -272,29 +276,29 @@
       if(modal) modal.style.display = 'none';
     }
 
-    // 核心启动与兼容性修复
+    // --- 智能启动逻辑 ---
     function startApp() {
-      renderContent();
+      // 1. 尝试渲染最近更新内容，直到数据就绪
+      let retryCount = 0;
+      const retryInterval = setInterval(() => {
+        const rendered = renderContent();
+        if (rendered || retryCount > 10) clearInterval(retryInterval);
+        retryCount++;
+      }, 500);
+
+      // 2. 加载名言
       if (typeof loadHitokoto === 'function') {
         loadHitokoto();
       }
     }
 
+    // 确保在各种生命周期都能触发
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', startApp);
     } else {
       startApp();
     }
-
-    // 手机端二次兜底
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const listContainer = document.getElementById('content-list');
-        if (listContainer && listContainer.innerHTML === "") {
-          startApp();
-        }
-      }, 1000);
-    });
+    window.addEventListener('load', renderContent);
   </script>
 </body>
 </html>
