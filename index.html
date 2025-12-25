@@ -50,9 +50,10 @@
     }
     .contact-item:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
 
-    /* 语录容器占位样式 */
+    /* 纯净的名言挂载点：样式由 js/quote.js 注入，此处不设背景或边框 */
     #hitokoto-container {
-      min-height: 80px; /* 预留空间减少抖动 */
+      display: none; 
+      min-height: 50px;
     }
 
     /* 右侧动态卡片 */
@@ -87,7 +88,7 @@
     .history-link { color: white; opacity: 0.6; font-size: 0.75rem; text-decoration: none; cursor: pointer; }
     .history-link:hover { opacity: 1; text-decoration: underline; }
 
-    /* 弹窗核心样式 */
+    /* 弹窗样式 */
     #history-modal {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); z-index: 1000;
@@ -106,7 +107,7 @@
       margin: 15px 0; font-family: monospace; border: 1px dashed var(--primary);
     }
 
-    /* 下方展示卡片 */
+    /* 展示卡片区 */
     .main-content { max-width: 1100px; margin: -50px auto 60px; padding: 0 20px; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     .card { 
@@ -136,6 +137,7 @@
           <a onclick="openEmailModal()" class="contact-item">Email</a>
           <a href="https://your-blog-or-sns.com" target="_blank" class="contact-item">Blog</a>
         </div>
+        
         <div id="hitokoto-container"></div>
       </div>
 
@@ -180,9 +182,11 @@
 
   <footer>© 2025 · Elena · Built with ❤️ & 💻</footer>
 
-  <script src="./update.js"></script>
-  <script src="./current.js"></script>
-  <script src="./quotes.js"></script> <script>
+  <script src="./js/update.js"></script>
+  <script src="./js/current.js"></script>
+  <script src="./js/quote.js"></script>
+
+  <script>
     let currentTab = 'log';
 
     function switchTab(type) {
@@ -268,22 +272,28 @@
       if(modal) modal.style.display = 'none';
     }
 
-    // 初始化加载
-    window.addEventListener('load', () => {
-      // 执行日志渲染
+    // 核心启动与兼容性修复
+    function startApp() {
       renderContent();
-      
-      // 执行名言加载
       if (typeof loadHitokoto === 'function') {
         loadHitokoto();
-      } else {
-        console.warn("未能检测到 loadHitokoto 函数，请确保 quotes.js 路径正确并已保存。");
-        // 自动降级：如果在本地 file 协议运行，提醒用户
-        if(window.location.protocol === 'file:') {
-            const container = document.getElementById('hitokoto-container');
-            if(container) container.innerHTML = '<div style="font-size:0.8rem; opacity:0.5; margin-top:20px;">(本地预览限制，语录功能需在服务器环境查看)</div>';
-        }
       }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startApp);
+    } else {
+      startApp();
+    }
+
+    // 手机端二次兜底
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const listContainer = document.getElementById('content-list');
+        if (listContainer && listContainer.innerHTML === "") {
+          startApp();
+        }
+      }, 1000);
     });
   </script>
 </body>
