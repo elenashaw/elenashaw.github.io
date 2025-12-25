@@ -192,14 +192,25 @@
     function renderContent() {
       const listContainer = document.getElementById('content-list');
       const dateLabel = document.getElementById('display-date');
-      if (currentTab === 'log' && window.siteHistory) {
-        const data = window.siteHistory[0];
-        dateLabel.innerText = data.date;
-        listContainer.innerHTML = data.logs.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
-      } else if (currentTab === 'plan' && window.maintenancePlans) {
-        const data = window.maintenancePlans[0];
-        dateLabel.innerText = data.date;
-        listContainer.innerHTML = data.plans.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+      
+      // 1. 安全检查：确保数据已加载
+      const historyData = (window.siteHistory && window.siteHistory.length > 0) ? window.siteHistory[0] : null;
+      const planData = (window.maintenancePlans && window.maintenancePlans.length > 0) ? window.maintenancePlans[0] : null;
+
+      if (currentTab === 'log') {
+        if (historyData) {
+          dateLabel.innerText = historyData.date;
+          // 兼容性处理：优先读 logs 字段
+          const items = historyData.logs || historyData.plans || [];
+          listContainer.innerHTML = items.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+        }
+      } else if (currentTab === 'plan') {
+        if (planData) {
+          dateLabel.innerText = planData.date;
+          // 兼容性处理：优先读 plans 字段
+          const items = planData.plans || planData.logs || [];
+          listContainer.innerHTML = items.map(item => `<div class="update-item"><span>${item}</span></div>`).join('');
+        }
       }
     }
 
