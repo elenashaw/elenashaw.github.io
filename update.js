@@ -1,6 +1,11 @@
-const siteStats = [
-  { label: "📚 课程笔记搬运", percent: 85 },
-  { label: "💡 LeetCode 模型", percent: 55 },
-  { label: "🐟 德语 B1 笔记", percent: 30 },
-  { label: "📄 论文库更新", percent: 20 }
-];
+// update.js
+window.updateInfo = {
+  date: "2025-12-25", // 您修改的日期
+  logs: [
+    "📚 课程笔记：完成《能源动力学》系统化迁移",
+    "💡 LeetCode：重构了动态规划专题的解题范式",
+    "📄 论文库：更新了 3 篇关于 Transformer 的精读笔记",
+    "🛠️ 项目实践：上线了个人工作流自动化文档",
+    "✍️ 阅读手记：新增《深度工作》复盘感悟"
+  ]
+};
