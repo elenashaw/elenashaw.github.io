@@ -3,17 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <title>我的个人主页 ✨</title>
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; line-height: 1.6; }
-        h1 { color: #2c3e50; }
-        .nav-link { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+        /* 1. 设置背景渐变，让色彩活泼起来 */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            line-height: 1.8; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* 2. 主卡片设计 */
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 { color: #e67e22; font-size: 2.5rem; margin-bottom: 10px; }
+
+        .subtitle { color: #7f8c8d; font-size: 1.1rem; margin-bottom: 30px; }
+
+        /* 3. 按钮的灵动动画 */
+        .nav-link { 
+            display: inline-block; 
+            margin: 15px; 
+            padding: 15px 35px; 
+            background: #ff9f43; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; /* 圆角按钮更显活泼 */
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 4px 15px rgba(255, 159, 67, 0.3);
+        }
+
+        /* 悬停时的“跳跃”效果 */
+        .nav-link:hover { 
+            background: #ee5253; 
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(238, 82, 83, 0.4);
+        }
+
+        .footer { margin-top: 50px; font-size: 0.9rem; color: #95a5a6; }
     </style>
 </head>
 <body>
-    <h1>你好，欢迎来到我的空间</h1>
-    <p>这是一个基于 GitHub Pages 构建的个人主页。</p>
+
+<div class="container">
+    <h1>👋 你好呀！欢迎来到我的空间</h1>
+    <p class="subtitle">🚀 正在通过代码和文字，构建我的知识小宇宙</p>
     
-    <a href="/course/" class="nav-link">查看课程笔记(Sphinx)</a>
+    <p>你可以根据以下导览查看我的个人课程笔记、项目代码、论文知识库等。<br>目前正在努力搬砖维护中... 🧱</p>
+    
+    <a href="/course/" class="nav-link">📚 开启课程笔记</a>
+    
+    <div class="footer">
+        © 2025 · Built with ❤️ and Sphinx
+    </div>
+</div>
+
 </body>
 </html>
