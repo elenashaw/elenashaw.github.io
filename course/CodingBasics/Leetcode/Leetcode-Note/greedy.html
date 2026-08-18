@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>贪心算法</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<h1 id="_1">贪心算法</h1>
+<h2 id="_2">适用贪心算法的问题</h2>
+<h3 id="greedy-choice-property">贪心选择性质（greedy-choice property)</h3>
+<p><strong>定义</strong>：我们可以通过做出<strong>局部最优</strong>的选择，从而最终导致<strong>全局最优解</strong>。</p>
+<p><strong>CLRS的观点</strong>：在动态规划中，我们通常需要先解决子问题，才能做出当前的选择；而在贪心算法中，我们可以在不考虑子问题结果的情况下，直接做出当前最好的选择，然后再去解决剩下的唯一子问题。</p>
+<p><strong>证明方法</strong>：书中强调，要证明一个问题具有贪心选择性质，通常需要使用<strong>替换论证法</strong>（Exchange Argument）：假设存在一个最优解但不包含你的贪心选择，通过证明将其中的元素替换为贪心选择后，解的质量不会变差。</p>
+<h3 id="optimal-substructure">最优子结构（Optimal Substructure)</h3>
+<p><strong>定义</strong>：一个问题的最优解包含其子问题的最优解。</p>
+<p><strong>在贪心中的应用</strong>：如果你做出了贪心选择，原问题就简化为一个规模更小的子问题。只要原问题具有最优子结构，那么“贪心选择 + 子问题的最优解”就能合成原问题的最优解。</p>
+<h2 id="_3">贪心算法设计的通用步骤</h2>
+<ol>
+<li><strong>转化问题：</strong> 将原问题设定为：做一个选择后，只剩下一个子问题。</li>
+<li><strong>证明安全：</strong> 证明在原始问题中做一个贪心选择总是“安全的”（即总能得到一个<strong>包含该选择</strong>的最优解）。</li>
+<li><strong>证明子结构：</strong> 证明做出选择后，剩余的子问题加上你的贪心选择，确实构成了原问题的最优解。</li>
+</ol>
+<h2 id="_4">其他用在贪心算法中的技巧</h2>
+<ul>
+<li>
+<p>先排序，后处理</p>
+</li>
+<li>
+<p>双指针扫描</p>
+</li>
+</ul>
+<h1 id="leetcode">leetcode</h1>
+<h3 id="455">455</h3>
+<pre><code class="language-c++">#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+// 全局静态优化：提升评测机执行效率
+static const int _ = []() {
+    ios::sync_with_stdio(false); // 优化输入输出流
+    cin.tie(nullptr);
+    return 0;
+}();
+
+class Solution {
+public:
+    int findContentChildren(vector&lt;int&gt;&amp; g, vector&lt;int&gt;&amp; s) {
+        // 1. 预处理：利用快排实现单调递增
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
+
+        int child_idx = 0;  // 需求端指针（同时作为满足计数值）
+        int cookie_idx = 0; // 资源端指针
+
+        const int n = g.size();
+        const int m = s.size();
+
+        // 2. 线性扫描：利用贪心性质进行匹配
+        while (child_idx &lt; n &amp;&amp; cookie_idx &lt; m) {
+            // 贪心选择：当前最小资源是否满足当前最小需求
+            if (s[cookie_idx] &gt;= g[child_idx]) {
+                child_idx++; // 满足需求，移动需求指针
+            }
+            cookie_idx++; // 无论是否满足，当前最小资源已处理（单向性）
+        }
+
+        return child_idx; // 返回满足的孩子总数
+    }
+};
+</code></pre>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>

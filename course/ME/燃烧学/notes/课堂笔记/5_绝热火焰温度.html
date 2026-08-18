@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绝热火焰温度</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<blockquote>
+<p>[!NOTE]</p>
+<p>温度</p>
+</blockquote>
+<h1 id="_1">绝热火焰温度</h1>
+<h2 id="intro">intro</h2>
+<h3 id="def">def</h3>
+<ul>
+<li>定义</li>
+<li>当燃料和空气的初始状态即 <strong>燃料/空气比</strong>及<strong>初始温度</strong>一定, 系统经过<strong>绝热燃烧</strong>过程达到化学平衡，且所释放出的热量（反应焓）全部用于提高燃烧产物温度时，所能达到的温度称为绝热火焰温度</li>
+<li>起始点：F/A, T0一定</li>
+<li>过程：绝热燃烧，热量全部用于提高产物温度</li>
+<li>终点：化学平衡</li>
+<li>符号</li>
+<li>Tad</li>
+</ul>
+<h3 id="_2">种类</h3>
+<ul>
+<li>
+<p>定压绝热火焰温度</p>
+</li>
+<li>
+<p>定容绝热火焰温度</p>
+</li>
+</ul>
+<h3 id="_3">能量守恒</h3>
+<h4 id="_4">定压</h4>
+<ul>
+<li>
+<p>反应物和生成物的总焓相等</p>
+</li>
+<li>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311141435743.png">🖼 [图片缺失: image-20240311141435743.png]</span></p>
+</li>
+<li>
+<p>焓与温度曲线</p>
+</li>
+<li>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311141654179.png">🖼 [图片缺失: image-20240311141654179.png]</span></p>
+</li>
+<li>
+<blockquote>
+<p>[!NOTE]</p>
+<pre><code>&gt; 一般情况下，产物的热容高
+</code></pre>
+</blockquote>
+</li>
+</ul>
+<h4 id="_5">定容</h4>
+<ul>
+<li>反应物和产物的总内能相等</li>
+<li>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311144036906.png">🖼 [图片缺失: image-20240311144036906.png]</span></p>
+</li>
+<li>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311144056765.png">🖼 [图片缺失: image-20240311144056765.png]</span></p>
+</li>
+<li>
+<p>理想气体</p>
+<ul>
+<li><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311145411577.png">🖼 [图片缺失: image-20240311145411577.png]</span></li>
+<li><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311145451290.png">🖼 [图片缺失: image-20240311145451290.png]</span></li>
+</ul>
+</li>
+<li>
+<p>质量守恒</p>
+<ul>
+<li>
+<p>$$
+  \huge m_{reac}=m_{prod}
+  $$</p>
+</li>
+<li>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311145633098.png">🖼 [图片缺失: image-20240311145633098.png]</span></p>
+</li>
+<li>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240317205035437.png">🖼 [图片缺失: image-20240317205035437.png]</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="_6">计算</h2>
+<h4 id="_7">情景</h4>
+<ul>
+<li>确定产物和反应程度</li>
+<li>确定焓与比热的对应温度</li>
+</ul>
+<h4 id="_8">思路</h4>
+<h5 id="_9">定压</h5>
+<ul>
+<li>
+<p>反应程度</p>
+</li>
+<li>
+<p>看是否需要假设完全燃烧</p>
+</li>
+<li>
+<p>确定生成物的组分</p>
+</li>
+<li>
+<blockquote>
+<p>[!NOTE]</p>
+<pre><code>&gt; 注意燃烧的时候，不要写纯氧气，要写成空气。
+
+&gt; 因为产物$N_2$​的潜热会分走一部分能量
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>求解方程</p>
+</li>
+<li>
+<p>$H_{react}=H_{prod}$</p>
+</li>
+<li>
+<p>$\Sigma <em prod="prod">{react} N_i\bar{h_i}=\Sigma </em>$​} N_i\bar{h_i</p>
+</li>
+<li>
+<p>产物的焓怎么计算</p>
+</li>
+<li>
+<p>已知温度，可以查表</p>
+</li>
+<li>
+<p>产物的焓怎么计算</p>
+</li>
+<li>
+<p>绝对焓=标准生成焓+潜焓</p>
+</li>
+<li>标准生成焓查表</li>
+<li>潜焓<ul>
+<li>$c_p<em>\Delta T=c_p</em>(Tad-T0)$</li>
+<li>Cp</li>
+<li>使用$\huge Cp(\frac{Tad+T0}{2})$​</li>
+<li>这里的Tad可以用估计</li>
+</ul>
+</li>
+</ul>
+<h5 id="_10">定容</h5>
+<h2 id="_11">影响因素</h2>
+<p><span class="missing-img" title="../../../../../Users/eleev/AppData/Roaming/Typora/typora-user-images/image-20240311144209235.png">🖼 [图片缺失: image-20240311144209235.png]</span></p>
+<h3 id="_12">注意事项</h3>
+<blockquote>
+<p>[!NOTE]</p>
+<ul>
+<li>定容的温度高于定压</li>
+<li>
+<p>因为一般情况下，燃烧膨胀。定压的有一部分能量拿去对外做功了</p>
+</li>
+<li>
+<p><strong>绝热火焰温度</strong>和<strong>理论燃烧温度</strong>不同</p>
+</li>
+<li>理论燃烧温度是反应完全发生</li>
+<li>绝热反应温度是达到化学平衡</li>
+<li>实际燃烧系统的火焰温度</li>
+<li>因为实际燃烧系统中，不仅有化学平衡，还有热量损失</li>
+</ul>
+</blockquote>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>

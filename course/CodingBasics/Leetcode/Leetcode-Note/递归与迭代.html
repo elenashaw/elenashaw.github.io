@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>基本概念</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<h1 id="_1">基本概念</h1>
+<h2 id="_2">递归的重点内容</h2>
+<p>递归（Recursion）是一种编程范式，指函数通过自身调用来解决问题。其核心在于<strong>分而治之</strong>：将大问题分解为相似的小问题，直到简单到可直接求解。重点包括：
+- <strong>基线条件（Base Case）</strong>：停止递归的条件，避免无限循环（如 n=0 时返回 1）。
+- <strong>递归条件（Recursive Case）</strong>：调用自身处理子问题，通常结合数学公式（如斐波那契数列：f(n) = f(n-1) + f(n-2)）。
+- <strong>隐式栈管理</strong>：每层调用形成调用栈，递归结束时逐层返回结果。</p>
+<p>示例（Python，计算阶乘）：</p>
+<pre><code class="language-python">def factorial(n):
+    if n == 0:  # 基线
+        return 1
+    return n * factorial(n-1)  # 递归
+</code></pre>
+<h2 id="_3">尾递归</h2>
+<p>尾递归（Tail Recursion）是递归的特例：<strong>递归调用是函数的最后操作</strong>，无后续计算（如返回递归结果后不做额外运算）。这允许编译器优化为<strong>循环</strong>（尾递归优化，Tail Call Optimization），避免栈溢出。</p>
+<ul>
+<li><strong>示例</strong>（非尾递归 vs 尾递归，斐波那契）：</li>
+<li>非尾：<code>return fib(n-1) + fib(n-2)</code>（需栈存储中间结果）。</li>
+<li>尾：传入累加参数，如<code>tail_fib(n, a=0, b=1)</code>，最后返回<code>tail_fib(n-1, b, a+b)</code>。</li>
+<li><strong>优势</strong>：空间O(1)，如函数式语言（Scheme）默认优化。Python不原生支持，但可手动转换。</li>
+<li><strong>注意</strong>：并非所有递归都能尾化；优化依赖语言实现。</li>
+</ul>
+<h2 id="_4">递归和迭代的关系</h2>
+<p>递归与迭代（Iteration，使用循环）是<strong>等价的</strong>：两者都能解决相同问题（如遍历数组、求和），但实现方式不同：
+- <strong>相似性</strong>：递归可转换为迭代，反之亦然（通过栈模拟递归）。
+- <strong>差异性</strong>：
+  | 方面     | 递归                 | 迭代                          |
+  | -------- | -------------------- | ----------------------------- |
+  | <strong>结构</strong> | 函数自调用，优雅简洁 | 循环（如for/while），显式控制 |
+  | <strong>空间</strong> | 占用调用栈，可能溢出 | 通常O(1)空间，高效            |
+  | <strong>适用</strong> | 树/图问题、自然分解  | 线性问题，避免深度限制        |
+- <strong>转换</strong>：递归用栈模拟迭代（如手动push/pop参数）；迭代用循环替换递归调用。递归更直观，但迭代更高效（无栈开销）。</p>
+<h1 id="_5">迭代与递归的转换</h1>
+<h3 id="_6">递归与迭代的转换方法</h3>
+<p>递归（Recursion）和迭代（Iteration）在功能上是<strong>等价的</strong>：两者都能解决相同问题（如计算阶乘、遍历树），但递归依赖函数自调用（隐式栈），迭代用循环（显式控制）。转换的核心是<strong>模拟调用栈</strong>：递归的“深度调用”可以用栈（列表或堆栈）替换为“显式管理”。递归转迭代更常见（避免栈溢出），迭代转递归较少（增加开销）。</p>
+<h4 id="1">1. <strong>递归 → 迭代的转换（通用步骤）</strong></h4>
+<ul>
+<li><strong>简单问题</strong>（线性、无分支）：直接用循环替换递归调用。</li>
+<li><strong>复杂问题</strong>（树/分治）：用栈模拟递归过程（push参数，pop处理结果）。</li>
+<li>步骤：<ol>
+<li>识别基线条件（Base Case）：用循环判断停止。</li>
+<li>保存递归参数到栈（而非调用）。</li>
+<li>循环pop栈，处理子问题并push结果。</li>
+<li>返回最终结果。</li>
+</ol>
+</li>
+</ul>
+<p><strong>示例：阶乘（factorial(n) = n * factorial(n-1)）</strong>
+   - <strong>递归版</strong>（Python）：
+     <code>python
+     def factorial_recursive(n):
+         if n == 0:  # 基线
+             return 1
+         return n * factorial_recursive(n-1)  # 递归
+     print(factorial_recursive(5))  # 输出: 120</code>
+   - <strong>迭代版</strong>（直接循环）：
+     <code>python
+     def factorial_iterative(n):
+         result = 1
+         for i in range(1, n + 1):
+             result *= i
+         return result
+     print(factorial_iterative(5))  # 输出: 120</code>
+   - 转换说明：递归的“n-1”链条用for循环累乘替换，无需栈。</p>
+<p><strong>另一个示例：斐波那契数列（f(n) = f(n-1) + f(n-2)）</strong>
+   - 递归易指数爆炸（低效），迭代高效。
+   - <strong>递归版</strong>（非尾）：
+     <code>python
+     def fib_recursive(n):
+         if n &lt;= 1:
+             return n
+         return fib_recursive(n-1) + fib_recursive(n-2)
+     print(fib_recursive(5))  # 输出: 5</code>
+   - <strong>迭代版</strong>（用变量跟踪前两项）：
+     <code>python
+     def fib_iterative(n):
+         if n &lt;= 1:
+             return n
+         a, b = 0, 1
+         for _ in range(2, n + 1):
+             a, b = b, a + b
+         return b
+     print(fib_iterative(5))  # 输出: 5</code>
+   - 用栈模拟递归（通用，但低效）：
+     <code>python
+     def fib_stack(n):
+         stack = [(n, 0, 1)]  # (当前n, a, b)
+         while stack:
+             curr_n, a, b = stack.pop()
+             if curr_n &lt;= 1:
+                 return a
+             stack.append((curr_n - 1, b, a + b))  # 模拟调用
+         return 0
+     print(fib_stack(5))  # 输出: 5</code></p>
+<h4 id="2">2. <strong>迭代 → 递归的转换</strong></h4>
+<ul>
+<li>较少用（增加栈开销），但可将循环“包装”成递归。</li>
+<li>步骤：用递归模拟循环计数器（参数递减到基线）。</li>
+<li><strong>示例：迭代求和 → 递归</strong><ul>
+<li><strong>迭代版</strong>：
+   <code>python
+   def sum_iterative(n):
+       total = 0
+       for i in range(1, n + 1):
+           total += i
+       return total
+   print(sum_iterative(5))  # 输出: 15</code></li>
+<li><strong>递归版</strong>：
+   <code>python
+   def sum_recursive(n):
+       if n == 0:  # 基线
+           return 0
+       return n + sum_recursive(n - 1)  # 递归（模拟循环）
+   print(sum_recursive(5))  # 输出: 15</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. <strong>尾递归优化（特殊转换）</strong></h4>
+<ul>
+<li>尾递归（递归调用是最后一步）可直接优化为迭代（空间O(1)）。</li>
+<li>示例（斐波那契尾递归）：
+     <code>python
+     def fib_tail(n, a=0, b=1):
+         if n == 0:
+             return a
+         return fib_tail(n - 1, b, a + b)  # 尾调用
+     print(fib_tail(5))  # 输出: 5（编译器可转循环）</code></li>
+<li>优势：避免栈增长，Python不支持自动优化，但手动易转迭代。</li>
+</ul>
+<h4 id="_7">比较表格</h4>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>递归转换到迭代的优势</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>空间</strong></td>
+<td>迭代O(1)，递归O(n)（深度）</td>
+<td>深递归易栈溢出（如n=1000）</td>
+</tr>
+<tr>
+<td><strong>时间</strong></td>
+<td>等价（若无指数分支）</td>
+<td>递归树问题需备忘录优化</td>
+</tr>
+<tr>
+<td><strong>代码</strong></td>
+<td>迭代更显式，易调试</td>
+<td>转换后测试边界（如n=0/-1）</td>
+</tr>
+</tbody>
+</table>
+<p>转换原则：从问题分解入手，优先迭代优化性能。如果你有具体代码想转换，贴上来我帮你！</p>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>

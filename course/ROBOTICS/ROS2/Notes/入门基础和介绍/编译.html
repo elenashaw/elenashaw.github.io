@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编译</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<h1 id="_1">编译</h1>
+<h2 id="c">C++</h2>
+<h3 id="c_1">c++三种编译方法</h3>
+<h4 id="gcc-g-ros-2">使用 gcc (或 g++) 编译 ROS 2 节点</h4>
+<p>这是最原始、最底层的编译方式。你需要<strong>手动</strong>告诉编译器所有的头文件路径、库文件路径以及需要链接的库。</p>
+<ul>
+<li><strong>工作原理</strong>：直接在终端输入一行极长的命令，例如： <code>g++ talker.cpp -o talker -I/opt/ros/humble/include/... -L/opt/ros/humble/lib -lrclcpp ...</code></li>
+<li><strong>优点</strong>：</li>
+<li>无需任何构建系统支持。</li>
+<li>有助于理解编译、链接的底层原理。</li>
+<li><strong>缺点</strong>：</li>
+<li><strong>极其繁琐</strong>：ROS 2 依赖项非常多，手动输入路径几乎不可能。</li>
+<li><strong>不可移植</strong>：换一台电脑或换一个 ROS 版本，路径全变了。</li>
+<li><strong>适用场景</strong>：极简单的单文件测试，或者学习 C++ 编译原理。</li>
+</ul>
+<h4 id="make-ros-2">使用 make 编译 ROS 2 节点</h4>
+<p><code>make</code> 通过读取一个名为 <code>Makefile</code> 的文件来自动化执行编译步骤。它比直接用 <code>gcc</code> 进了一步，因为你可以把复杂的命令写在脚本里。</p>
+<ul>
+<li><strong>工作原理</strong>：你编写一个 <code>Makefile</code>，定义好变量和规则，然后在终端输入 <code>make</code>。</li>
+<li><strong>优点</strong>：</li>
+<li><strong>增量编译</strong>：只会重新编译修改过的文件，节省时间。</li>
+<li><strong>脚本化</strong>：不再需要重复输入长命令。</li>
+<li><strong>缺点</strong>：</li>
+<li><strong>语法晦涩</strong>：Makefile 语法相对原始。</li>
+<li><strong>手动维护依赖</strong>：你仍然需要手动在 Makefile 里写死 ROS 的安装路径，不够灵活。</li>
+<li><strong>适用场景</strong>：小型、不依赖于 ROS 标准构建工具（colcon）的独立 C++ 项目。</li>
+</ul>
+<h4 id="cmakeliststxt-ros-2">使用 CMakeLists.txt 编译 ROS 2 节点</h4>
+<p>这是 <strong>ROS 2 官方推荐的标准方式</strong>。CMake 是一个跨平台的构建系统生成器，它不直接编译，而是生成 Makefile 或 Ninja 文件。</p>
+<ul>
+<li><strong>工作原理</strong>：使用 <code>find_package(rclcpp REQUIRED)</code> 自动寻找 ROS 2 的路径。</li>
+<li><strong>优点</strong>：</li>
+<li><strong>高度自动化</strong>：自动处理复杂的依赖关系（如 <code>ament_cmake</code>）。</li>
+<li><strong>跨平台</strong>：同一套代码可以在 Linux、Windows、macOS 上生成对应的构建配置。</li>
+<li><strong>集成度高</strong>：完美配合 <code>colcon build</code> 命令，实现整个工作空间的统一管理。</li>
+<li><strong>缺点</strong>：</li>
+<li>需要学习 CMake 的语法规则。</li>
+<li><strong>适用场景</strong>：<strong>所有正式的 ROS 2 开发</strong>。</li>
+</ul>
+<h3 id="gcc">gcc编译</h3>
+<h4 id="_2">动态链接库</h4>
+<ul>
+<li>
+<p><span class="missing-img" title="pics/image-20260116041011001.png">🖼 [图片缺失: image-20260116041011001.png]</span></p>
+</li>
+<li>
+<p>静态（链接）库：在链接步骤中，链接器将从库文件取得所需的代码，复制到生成的可执行文件中，这种库称为静态（链接）库，其特点是可执行文件中包含了库代码的一份完整拷贝，缺点是被多次使用就会多份冗余拷贝</p>
+</li>
+<li>
+<p>动态（链接）库：程序在开始运行后调用库函数时才被载入，这种库独立于现有的程序，其本身不可执行，但包含着程序需要调用的一些函数，这种库称为动态（链接）库（Dynamic Link Library）。</p>
+</li>
+<li>
+<p>文件格式</p>
+</li>
+<li>在widows平台下，静态链接库是.lib文件，动态库文件是.dll文件。在linux平台下，静态链接库是.a文件，动态链接库是.so文件。</li>
+</ul>
+<h4 id="gros2c">g++编译ros2的c++节点</h4>
+<h3 id="make">make编译</h3>
+<h3 id="cmake">cmake编译</h3>
+<h2 id="python">python</h2>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>

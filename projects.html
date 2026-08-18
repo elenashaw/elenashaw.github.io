@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目展示 · Elena's Space</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.7; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1100px; margin:30px auto 60px; padding:0 20px; }
+  .page-title { font-size:1.8rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:24px; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:22px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:26px 28px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:10px; }
+  .card:hover { transform:translateY(-5px); border-color:var(--primary); box-shadow:0 14px 30px rgba(0,0,0,.08); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.2rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.92rem; line-height:1.65; flex:1; }
+  .lang { align-self:flex-start; font-size:.75rem; background:#eef2ff; color:#4338ca; padding:3px 12px; border-radius:50px; font-weight:600; }
+  footer { text-align:center; padding:40px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html">🏠 首页</a>
+  <a href="course/index.html">📚 课程笔记</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw" target="_blank">GitHub 主页</a>
+</div>
+<div class="container">
+  <h1 class="page-title">🛠️ 项目展示</h1>
+  <div class="page-sub">个人项目与学习实践，点击卡片进入 GitHub 仓库</div>
+  <div class="card-grid">
+    <a class="card" href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">
+      <h3>📝 Xbomb-Note</h3>
+      <p>个人笔记源仓库：机械、工程、计算机科学与人工智能等方向的系统化笔记。</p>
+      <span class="lang">Notes</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/Zen-Pomodoro-Project" target="_blank">
+      <h3>🍅 Zen-Pomodoro-Project</h3>
+      <p>基于 React & TypeScript 的功能丰富的番茄钟应用，支持自定义主题、模式切换与沉浸式环境音。</p>
+      <span class="lang">TypeScript</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/PIC-CV-LAN" target="_blank">
+      <h3>📷 PIC-CV-LAN</h3>
+      <p>拍照识别物品，并把主要物品翻译成中、英、德三种语言。</p>
+      <span class="lang">Python</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/ROS2-WS-Practice" target="_blank">
+      <h3>🤖 ROS2-WS-Practice</h3>
+      <p>记录 ROS2 学习过程中的基础功能实现：话题、服务及常用工具配置（基于 Jazzy）。</p>
+      <span class="lang">Python</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/DLFBP-Keras-Practice" target="_blank">
+      <h3>🧠 DLFBP-Keras-Practice</h3>
+      <p>基于 Andrew Glassner《Deep Learning: From Basics to Practice》的 Keras 实践代码。</p>
+      <span class="lang">Jupyter Notebook</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/Activation-Maximization-VGG-Reimplement" target="_blank">
+      <h3>🔍 Activation-Maximization-VGG</h3>
+      <p>VGG 激活最大化（Activation Maximization）项目复现。</p>
+      <span class="lang">Python</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/Engineering-and-CS-Practice" target="_blank">
+      <h3>🔬 Engineering-and-CS-Practice</h3>
+      <p>跨学科工程仓库：计算机科学（OS、ML、DL）、机械工程与能源系统的课程实验与项目。</p>
+      <span class="lang">Python</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/Deltapedia-MyLib-AINote" target="_blank">
+      <h3>💡 Deltapedia-MyLib-AINote</h3>
+      <p>日常学习与生活中的有趣概念集合，由 AI 生成并打磨，丰富个人洞见库。</p>
+      <span class="lang">Notes</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/Reading-Books-MyLib" target="_blank">
+      <h3>📖 Reading-Books-MyLib</h3>
+      <p>阅读摘录与思考：科学、技术、生产力、心态、工作方式、社会、文学等广泛主题。</p>
+      <span class="lang">Notes</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/Notion-Widgets" target="_blank">
+      <h3>🧩 Notion-Widgets</h3>
+      <p>为 Notion 模板编写的 widgets 代码。</p>
+      <span class="lang">HTML</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/OCT-Laser-Weld-Project" target="_blank">
+      <h3>⚡ OCT-Laser-Weld-Project</h3>
+      <p>OCT 激光焊接相关项目。</p>
+      <span class="lang">Python</span>
+    </a>
+    <a class="card" href="https://github.com/liz-shaw/ClauseLab" target="_blank">
+      <h3>🧪 ClauseLab</h3>
+      <p>JavaScript 实验项目。</p>
+      <span class="lang">JavaScript</span>
+    </a>
+  </div>
+</div>
+<footer>© 2026 · Elena · Built with ❤️ & 💻</footer>
+</body>
+</html>

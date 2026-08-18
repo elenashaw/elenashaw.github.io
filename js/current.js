@@ -1,11 +1,12 @@
 // current.js
 window.maintenancePlans = [
   {
-    date: "2025-12-25",
+    date: "2026-08-19",
     plans: [
-      "👀 计算机视觉笔记更新",
-      "📖 整理传热学课程笔记",
-      "⌨️ LeetCode 贪心法",
+      "📖 继续补充传热学 / 燃烧学课堂笔记",
+      "⌨️ LeetCode 更多题型解析",
+      "🤖 ROS2 工具与实践深入",
+      "🔍 Xbomb 笔记持续迁移与整理",
     ]
   }
 ];

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2_fundamentals of combustion</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<h2 id="new-items">New Items</h2>
+<ul>
+<li>
+<p>蒸发潜热</p>
+</li>
+<li>
+<p>蒸发潜热是指在<strong>单位质量的液体从液态变为气态</strong>时所吸收的热量。在蒸发过程中，虽然温度保持不变（即使处于沸点），但液体中的分子仍然能够从液态转变为气态。这个过程需要吸收能量以克服分子间的吸引力，使得分子能够脱离液体表面并转变为气体状态。蒸发潜热的大小取决于液体的种类和温度，通常以单位质量的热量（如焦耳/克或千焦/千克）来表示。</p>
+</li>
+<li>
+<p>水的蒸发潜热特别大</p>
+<ul>
+<li>所以水常常用来冷却</li>
+</ul>
+</li>
+<li>
+<p>空燃比</p>
+</li>
+<li>
+<p>空燃比是指内燃机（例如汽车发动机）中空气和燃料的质量比。在内燃机中，燃料需要与空气混合才能进行燃烧，产生推动力或驱动动力机械。空燃比的确定对于引擎的性能和排放都非常重要。</p>
+<p>一般情况下，空燃比是以质量比表示的，通常用空气的质量除以燃料的质量来表示。例如，一个空燃比为14.7:1的内燃机表示每单位质量的燃料需要14.7单位质量的空气来完全燃烧。</p>
+<p>空燃比的选择直接影响到内燃机的效率和排放。较为理想的空燃比可以使燃料得到充分的燃烧，从而提高能量利用率并减少有害排放物的产生。</p>
+</li>
+<li>
+<p>化学当量</p>
+</li>
+<li>
+<p>化学当量是化学中用于表示物质量之间等价关系的概念。它是指在化学反应中，不同物质之间以摩尔（或其他适当的单位）计算的化学量之比。具体来说，化学当量指的是一个物质与另一个物质在化学反应中的摩尔比或化学量比。</p>
+<p>例如，在简单的化学反应中，如果一个化合物A和一个化合物B发生反应，它们的化学当量关系可以用一个化学方程式表示，如下所示：</p>
+<p>aA + bB → cC + dD</p>
+<p>其中，a、b、c、d分别代表化学物质A、B、C、D的化学计量数。在这个方程式中，化学当量的关系是以反应物A和B的摩尔比（或化学量比）来表示的。</p>
+<p>化学当量的概念在化学计算和分析中非常重要，因为它可以用于确定化学反应中物质的量，从而帮助计算反应的摩尔比、质量变化以及反应物和生成物之间的关系。</p>
+</li>
+<li>
+<p>生成焓</p>
+</li>
+<li>
+<p>生成焓是指将某种物质由其组成元素的<strong>稳定状态</strong>（通常是在标准状态下）合成为该物质所需的<strong>焓变化</strong>。通常情况下，生成焓是在<strong>常温常压</strong>下计算的。它表示了在这个过程中各种化学键的形成或断裂所涉及的能量变化。</p>
+<p>生成焓的计算基于化学反应中产生或消耗的能量。例如，对于单质元素的生成焓，一般取该元素的稳定状态（通常是在标准状态下，如25摄氏度和1大气压）为零。然后，将这些元素以其化学式的方式组合成所需的化合物，并计算这个过程中涉及的所有化学键的能量变化，从而得到生成焓的值。</p>
+<p>生成焓在化学热力学和热力学计算中具有重要作用，因为它可以用来计算化学反应的热效应，例如反应焓、燃烧热等。</p>
+</li>
+<li>
+<p>显热和潜热</p>
+</li>
+<li>
+<p>显热： 温度变化</p>
+</li>
+<li>潜热： 温度不变，相变</li>
+</ul>
+<h2 id="fundamentals-of-chemistry-thermodynamics">Fundamentals of Chemistry Thermodynamics</h2>
+<h3 id="properties">properties</h3>
+<ul>
+<li>extensive</li>
+<li>intensive</li>
+</ul>
+<h3 id="enthalpy-and-internal-energy">enthalpy and internal energy</h3>
+<h3 id="fuel-and-oxidizer">燃料和氧化剂（fuel and oxidizer)</h3>
+<ul>
+<li>火三角</li>
+<li>燃料</li>
+<li>火源</li>
+<li>氧化剂</li>
+</ul>
+<h4 id="_1">燃料</h4>
+<ul>
+<li>
+<p>燃料的分类</p>
+</li>
+<li>
+<p>元素、生产来源、等分类</p>
+</li>
+<li>
+<p>常见的化学分类</p>
+<ul>
+<li>烷烯炔环苯等等</li>
+</ul>
+</li>
+<li>
+<p>石化燃油</p>
+</li>
+<li>
+<p>石油本身的燃点很高</p>
+</li>
+<li>
+<p>重油</p>
+<ul>
+<li>重油是指石油提炼过程中得到的一种石油产品，通常具有较高的密度和粘度。它是从原油中提炼出来的，通常在温度较低的条件下得到，因此它的组分相对较重，其中含有许多高分子量的碳氢化合物。</li>
+</ul>
+<p>重油通常是在精炼过程的较后阶段产生的，因为它的密度较大，粘度较高，含有较多的杂质，使得提炼过程较为复杂。由于其较低的经济价值和较高的粘度，重油在炼油业中通常被视为副产品或次级产品。</p>
+<p>重油主要用途包括工业用途、加热和发电，还可用作某些化工产品的原料。此外，在一些国家，重油也被用作船舶的燃料。尽管重油在一些方面不如轻质石油产品便利，但由于其相对便宜和可获得性，仍然在某些领域有其应用价值。</p>
+<ul>
+<li>价格低</li>
+<li>常用于轮船</li>
+</ul>
+</li>
+<li>
+<p>含氧燃料</p>
+</li>
+<li>醇(alcohol)类燃料<ul>
+<li>羟基：-OH</li>
+<li>有氢键</li>
+</ul>
+</li>
+<li>酯类燃料</li>
+<li>醚类</li>
+<li>呋喃类：<ul>
+<li>含氧单杂环化合物</li>
+<li>香：让细胞敏感：反应活性强</li>
+</ul>
+</li>
+</ul>
+<h4 id="_2">氧化剂</h4>
+<ul>
+<li>常用空气</li>
+<li>氧气与氮气比：1：3.76</li>
+<li>
+<p>氮气作为稀释剂</p>
+</li>
+<li>
+<p>如需要提高燃烧强度，氧化剂可以选择采用纯氧或富氧、𝐍𝟐𝐎𝟒、𝐇𝟐𝐎𝟐等（火箭发动机、 氧炔焰等</p>
+</li>
+</ul>
+<h3 id="_3">化学当量与空燃比</h3>
+<ul>
+<li></li>
+</ul>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>

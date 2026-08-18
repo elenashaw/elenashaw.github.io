@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nodes</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<hr />
+<h2 id="typora-root-url-pics">typora-root-url: ./..\pics</h2>
+<h1 id="nodes">nodes</h1>
+<h2 id="intro">Intro</h2>
+<h3 id="what-is-node">WHAT IS NODE</h3>
+<ul>
+<li>节点式应用程序的一个子程序，负责单一的模块化功能（类似类class； 他们之间会进行通信。</li>
+<li>在 ROS 2 中，一个可执行文件（C++ 程序、Python 程序等）可以包含一个或多个节点</li>
+<li>节点被组合成一个图graph, 使用topic, service, parameters, actions进行通信</li>
+</ul>
+<h3 id="_1">理解（以工作空间的角度</h3>
+<ul>
+<li>package</li>
+<li>程序中的独立单元</li>
+<li>在包中创建节点</li>
+<li>
+<p>例子</p>
+<ul>
+<li><span class="missing-img" title="pics/image-20260126172717622.png">🖼 [图片缺失: image-20260126172717622.png]</span></li>
+<li>
+<p>节点</p>
+<ul>
+<li>相机驱动</li>
+<li>图像处理</li>
+<li>说明</li>
+<li>每个节点都可以单独启动</li>
+<li>有时候节点放在哪个包比较难以决定</li>
+</ul>
+</li>
+<li>
+<p>节点之间可以通信</p>
+</li>
+<li>
+<p><span class="missing-img" title="pics/image-20260126173103534.png">🖼 [图片缺失: image-20260126173103534.png]</span></p>
+</li>
+<li>包之间也可以进行通信</li>
+</ul>
+</li>
+</ul>
+<h3 id="node">Node的好处</h3>
+<ul>
+<li>降低代码复杂度</li>
+<li>可拓展性强</li>
+<li>容错率</li>
+<li>在不同进程中的节点，他们不会直接链接，但是仍然可以通信</li>
+<li>一个节点崩溃，不会导致其他崩溃节点</li>
+<li>编程语言无关python，c++等等都可以用</li>
+<li>你可以在python里开发大部分应用，将某些需要快速执行速度的节点用c++进行编写</li>
+</ul>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<ul>
+<li>两个节点不能有相同的名称</li>
+<li>如果要运行同一节点的多个实例，必须要注意</li>
+</ul>
+</blockquote>
+<h2 id="python">python节点实例</h2>
+<h3 id="_2">创建节点并且运行</h3>
+<ul>
+<li>file: src/my_py_pkg/my_py_pkg/my_first_node.py</li>
+</ul>
+<pre><code class="language-python">#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+
+def main(args=None):
+    rclpy.init(args=args)    #must-do
+
+    node=Node(&quot;py_test_node_name&quot;)   # arg: name
+    node.get_logger().info(&quot;Hello world&quot;)   
+
+    rclpy.shutdown()   # must-do, no args
+
+
+
+if __name__==&quot;__main__&quot;:
+    main()
+</code></pre>
+<p><span class="missing-img" title="../../ROBOTICS/pics/image-20260126175955971.png">🖼 [图片缺失: image-20260126175955971.png]</span></p>
+<ul>
+<li>
+<p><code>chmod +x name.py</code>  </p>
+</li>
+<li>
+<p><strong>普通运行方式</strong>：需要召唤 Python 解释器来读取它： <code>python3 name.py</code></p>
+<p><strong>加了chmod +x 后的运行方式</strong>：可以像运行原生程序一样直接点名运行它： <code>./name.py</code> <em>(前提是你在脚本第一行写了特殊的“暗号”，如 <code>#!/usr/bin/env python3</code>)</em></p>
+</li>
+</ul>
+<h3 id="_3">建立可执行文件</h3>
+<ul>
+<li>
+<p>在setup.py中设置路径</p>
+</li>
+<li>
+<p>src/setup.py</p>
+<ul>
+<li>```python
+     entry_points={
+          'console_scripts': [
+              "x_file_name = my_py_pkg.my_first_node:main"
+          ],  #注意没有文件格式后缀，：后面跟节点；.作为文件树索引</li>
+</ul>
+<p>```</p>
+</li>
+<li>
+<p>保存文件</p>
+</li>
+<li>
+<p>去工作空间文件夹下打开终端：</p>
+</li>
+<li>
+<p><code>python
+    colcon build --packages-select -pkgName</code></p>
+</li>
+<li></li>
+<li>
+<p>source ~/.bashrc</p>
+</li>
+<li>
+<p>确保bash文件加入到了.bashrc中的路径,这个文件在install文件底下</p>
+</li>
+<li>
+<p>运行可执行文件</p>
+</li>
+<li>
+<p><code>python
+    ros2 run package_name xFileName</code></p>
+</li>
+</ul>
+<h3 id="oop">面向对象编程OOP（节点类）</h3>
+<ul>
+<li>建立节点类：</li>
+</ul>
+<p>```python
+  import rclpy
+  from rclpy.node import Node</p>
+<p>class MyNode(Node): # 继承 Node 类
+      def <strong>init</strong>(self): # 构造函数
+          super().<strong>init</strong>("py_test") 
+          self.get_logger().info("Hello ROS2!")
+          self.create_timer(1.0,self.timer_callback)  #注意这里没有括号!!!!!!!!定了一个闹钟，每隔1 sec响一次
+    def timer_callback(self):
+          self.get_logger().info("hello world")</p>
+<p>def main(args=None): # 注意冒号
+      rclpy.init(args=args)
+      node = MyNode()   # 实例化类
+      rclpy.spin(node)  # 保持节点运行
+      rclpy.shutdown()  # 关闭</p>
+<p>if <strong>name</strong> == '<strong>main</strong>':
+      main()
+  ```</p>
+<h2 id="c">c++节点实例</h2>
+<h3 id="_4">创建节点并运行</h3>
+<ul>
+<li>
+<p>编码文件区</p>
+</li>
+<li>
+<p>VSCode工作区</p>
+<ul>
+<li>和python一样，还是在file/src处</li>
+</ul>
+</li>
+<li>
+<p>file/src/pkg/src/ : 空文件区</p>
+</li>
+<li>
+<p><code>bash
+    touch my_first_node.cpp</code></p>
+<ul>
+<li>touch:创建新的空文件</li>
+</ul>
+</li>
+<li>
+<p>```c++
+    //my_first_node.cpp
+    #include "rclcpp/rclcpp.hpp"</p>
+<p>int main(int argc, char **argv)
+{
+    rclcpp::init(argc,argv); //initialize</p>
+<pre><code>auto node = std::make_shared&lt;rclcpp::Node&gt;("cpp_test");     //share pointer
+
+RCLCPP_INFO(node-&gt;get_logger(), "Hello world");
+
+rclcpp::shutdown();
+return 0;
+</code></pre>
+<p>}
+```</p>
+<h3 id="_5">建立可执行文件</h3>
+<ul>
+<li>```bash
+//CmakeLists.txt
+cmake_minimum_required(VERSION 3.8)  #CMAKE version
+project(my_cpp_pkg)</li>
+</ul>
+<p>if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()</p>
+<h1 id="find-dependencies">find dependencies</h1>
+<p>find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)</p>
+<p>add_executable(cpp_node src/my_first_node.cpp)</p>
+<h1 id="cpp_nodeexecutable-file-name">cpp_node:executable file name</h1>
+<h1 id="node-directory-path">node directory path</h1>
+<p>ament_target_dependencies(cpp_node rclcpp)</p>
+<h1 id="1st-executable-name">1st: executable name</h1>
+<h1 id="2nd-dependencies">2nd dependencies</h1>
+<p>install(TARGETS
+  cpp_node # exetable
+  DESTINATION lib/${PROJECT_NAME} 
+)</p>
+<p>ament_package()</p>
+<p>```</p>
+</li>
+<li>
+<p>终端指令(和python几乎一样)</p>
+</li>
+<li>
+<p>```bash
+    elizabeth@Stewart:~/Documents/ROS2-learning/ros2_ws$ colcon build --packages-select my_cpp_pkg
+    Starting &gt;&gt;&gt; my_cpp_pkg
+    Finished &lt;&lt;&lt; my_cpp_pkg [3.35s]                     </p>
+<p>Summary: 1 package finished [3.57s]
+elizabeth@Stewart:~/Documents/ROS2-learning/ros2_ws$ ls
+build  install  log  src
+elizabeth@Stewart:~/Documents/ROS2-learning/ros2_ws$ source install/setup.bash 
+elizabeth@Stewart:~/Documents/ROS2-learning/ros2_ws$ cd
+elizabeth@Stewart:~$ ros2 run my_cpp_pkg cpp_node 
+[INFO] [1770211395.606233009] [cpp_test]: Hello world
+elizabeth@Stewart:~$ </p>
+<p>```</p>
+</li>
+<li>
+<p>ros2 run my_cpp_pkg cpp_node : 节点名字是可执行文件的名字</p>
+</li>
+</ul>
+<h3 id="_6">面向对象编程</h3>
+<pre><code class="language-c++">#include &quot;rclcpp/rclcpp.hpp&quot;
+
+class MyNode: public rclcpp::Node
+{
+public:
+    MyNode() : Node(&quot;cpp_test&quot;), counter_(0)
+    {
+        RCLCPP_INFO(this-&gt;get_logger(), &quot;Hello World&quot;);
+        timer_=this-&gt;create_wall_timer(std::chrono::seconds(1),
+                                       std::bind(&amp;MyNode::timerCallback, this));
+    }
+
+private:
+    void timerCallback(){
+        RCLCPP_INFO(this-&gt;get_logger(),&quot;Hello %d&quot;, counter_ );
+        counter_ ++;
+    }
+    rclcpp::TimerBase::SharedPtr timer_;
+    int counter_;
+};
+
+int main(int argc, char **argv)
+{
+    rclcpp::init(argc,argv); //initialize
+
+    auto node = std::make_shared&lt;MyNode&gt;();     //share pointer
+
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
+}
+</code></pre>
+<h4 id="inheritance">类继承 (Inheritance)</h4>
+<ul>
+<li><strong>语法</strong>：<code>class MyNode : public rclcpp::Node</code></li>
+<li><strong>细节</strong>：通过公有继承，使 <code>MyNode</code> 拥有父类 <code>Node</code> 的所有成员函数（如 <code>get_logger()</code>）。这是 ROS 2 组件化开发的基础。</li>
+</ul>
+<h4 id="member-initializer-list">构造函数初始化列表 (Member Initializer List)</h4>
+<ul>
+<li><strong>语法</strong>：<code>MyNode() : Node("name"), counter_(0)</code></li>
+<li><strong>细节</strong>：冒号后直接初始化父类和成员变量。<strong>严谨点</strong>：这比在 <code>{}</code> 内赋值效率更高，因为它避免了先默认构造再赋值的过程，直接进行初始化。</li>
+</ul>
+<h4 id="chrono">时间间隔表示 (Chrono)</h4>
+<ul>
+<li><strong>语法</strong>：<code>std::chrono::seconds(1)</code></li>
+<li><strong>细节</strong>：C++11 标准时间库。<code>seconds(1)</code> 是一个持续时间对象（Duration）。ROS 2 强制要求使用这类类型安全的时间单位，而不是简单的整数，以防单位混淆（秒 vs 毫秒）。</li>
+</ul>
+<h4 id="function-binding">函数绑定 (Function Binding)</h4>
+<ul>
+<li><strong>语法</strong>：<code>std::bind(&amp;MyNode::timerCallback, this)</code></li>
+<li><strong>细节</strong>：</li>
+<li><code>&amp;MyNode::timerCallback</code>：成员函数的地址。</li>
+<li><code>this</code>：当前对象的指针，作为隐式参数传给成员函数。</li>
+<li><strong>语法要点</strong>：成员函数必须绑定到具体对象实例才能被调用。</li>
+</ul>
+<h4 id="logging-macro">日志宏格式化 (Logging Macro)</h4>
+<ul>
+<li><strong>语法</strong>：<code>RCLCPP_INFO(logger, "format", args...)</code></li>
+<li><strong>细节</strong>：底层基于 <code>printf</code> 风格。</li>
+<li><code>%d</code>：必须对应 <code>int</code> 类型。</li>
+<li><strong>严谨点</strong>：宏会在编译预处理阶段展开，第一个参数必须是 <code>rclcpp::Logger</code> 类型对象。</li>
+</ul>
+<h4 id="spinning">运行死循环 (Spinning)</h4>
+<ul>
+<li><strong>语法</strong>：<code>rclcpp::spin(node)</code></li>
+<li><strong>细节</strong>：</li>
+<li><strong>语法本质</strong>：这是一个阻塞式调用。</li>
+<li><strong>功能</strong>：它会让主线程进入等待状态，由 ROS 2 内部的 Executor（执行器）扫描并触发所有已注册的回调函数（如 Timer 或 Subscription）。没有这一行，异步事件永远不会被触发。</li>
+</ul>
+<h2 id="_7">命令和操作</h2>
+<h3 id="ros2">ros2</h3>
+<ul>
+<li>ros2 +两次Tab: 显示指令菜单</li>
+</ul>
+<h3 id="run">run</h3>
+<ul>
+<li><code>ros2 run</code></li>
+</ul>
+<pre><code class="language-bash">ros2 run pkgName exeName
+</code></pre>
+<ul>
+<li>Remapping</li>
+</ul>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node --ros-args --remap __node:=my_turtle
+</code></pre>
+<h3 id="node_1">node</h3>
+<ul>
+<li>
+<p>node list</p>
+</li>
+<li>
+<p><code>ros2 node list</code></p>
+</li>
+<li>
+<p>会显示所有正在运行的节点的名称。当您想要与某个节点交互，或者您的系统运行着许多节点并需要跟踪它们时，这个命令尤其有用。</p>
+</li>
+<li>
+<p><code>ros2 node info</code></p>
+<p><code>bash
+ros2 node info &lt;node_name&gt;</code></p>
+<p><code>ros2 node info</code> 返回订阅者、发布者、服务和操作的列表，即与该节点交互的 ROS 图连接。</p>
+</li>
+</ul>
+<h1 id="_8">节点间的交互方式</h1>
+<ul>
+<li>
+<p>话题-topics</p>
+</li>
+<li>
+<p>服务-services</p>
+</li>
+<li>
+<p>动作-Action</p>
+</li>
+<li>
+<p>参数-parameters</p>
+</li>
+</ul>
+<h2 id="topics">topics（主题</h2>
+<h3 id="_9">作用和规则</h3>
+<ul>
+<li>
+<p>主题是 ROS 图的重要组成部分，它们充当<strong>节点间交换消息的总线</strong></p>
+</li>
+<li>
+<p>主题有一个<strong>消息类型</strong>(message type)</p>
+</li>
+<li>
+<p>一个节点可以向<strong>任意</strong>数量的主题发布数据，并同时订阅<strong>任意</strong>数量的主题</p>
+</li>
+<li>
+<p>订阅者和发布者匿名且相互独立</p>
+</li>
+<li>
+<p>以收听电台为例</p>
+</li>
+<li>
+<table>
+<thead>
+<tr>
+<th><strong>ROS2 概念</strong></th>
+<th><strong>电台比喻</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Node (节点)</strong></td>
+<td><strong>电台设备 / 手机</strong></td>
+<td>每一个运行的程序实体。发射塔是一个节点，你的手机也是一个节点。</td>
+</tr>
+<tr>
+<td><strong>Publisher (发布者)</strong></td>
+<td><strong>无线电发射源</strong></td>
+<td>节点内部负责“往外广播”的那个功能组件。</td>
+</tr>
+<tr>
+<td><strong>Topic (话题)</strong></td>
+<td><strong>调频频率 (例如 FM 101.5)</strong></td>
+<td><strong>这是最关键的一点</strong>：Topic 不是电台本身，而是大家约好的那个“频道号”。</td>
+</tr>
+<tr>
+<td><strong>Message (消息)</strong></td>
+<td><strong>音频信号</strong></td>
+<td>在频道里流动的具体内容（音乐、新闻等）。</td>
+</tr>
+<tr>
+<td><strong>Subscriber (订阅者)</strong></td>
+<td><strong>手机里的收音插件</strong></td>
+<td>节点内部负责“监听并解码”的那个功能组件。</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><span class="missing-img" title="../pics/image-20260215051416334.png">🖼 [图片缺失: image-20260215051416334.png]</span></p>
+</li>
+<li>
+<p>同一个主题可以有多个publisher, subscriber</p>
+<ul>
+<li>publisher和subscriber自由组合：publisher和subscriber发送或者接受相同类型的数据</li>
+<li>publisher和subscriber相互独立，且匿名：不知道对方是谁</li>
+<li>
+<p>一个节点还可以发送多个主题</p>
+</li>
+<li>
+<p><span class="missing-img" title="/../../../robotics/pics/image-20260215051759472.png">🖼 [图片缺失: image-20260215051759472.png]</span></p>
+</li>
+</ul>
+</li>
+<li>
+<p>数据流动时单项的</p>
+</li>
+</ul>
+<h3 id="_10">什么时候使用主题</h3>
+<ul>
+<li>比如监听传感器</li>
+</ul>
+<h3 id="_11"><strong>命令和操作</strong></h3>
+<ul>
+<li>
+<p>rqt_graph</p>
+</li>
+<li>
+<p>可视化变化的节点和主题，以及它们之间的连接。</p>
+</li>
+<li>
+<p><code>bash
+    ros2 run rqt_graph rqt_graph</code></p>
+</li>
+<li>
+<p>list</p>
+</li>
+<li>
+<p><code>bash
+    ros2 topic list</code></p>
+</li>
+<li>
+<p>echo</p>
+</li>
+<li>
+<p><code>bash
+    ros2 topic echo &lt;topic_name&gt;</code></p>
+</li>
+<li>
+<p>查看某个主题已发布的数据</p>
+</li>
+<li>
+<p>info</p>
+</li>
+<li>
+<p><code>bash
+    ros2 topic info /turtle1/cmd_vel
+    ros2 topic info /turtle1/cmd_vel --verbose //详细信息</code></p>
+</li>
+<li>
+<p>interface</p>
+</li>
+<li>
+<p>节点通过主题以消息的形式发送数据。发布者和订阅者必须发送和接收相同类型的消息才能进行通信。</p>
+</li>
+<li>
+<p><code>bash
+    ros2 interface show geometry_msgs/msg/Twist</code></p>
+</li>
+<li>
+<p>pub</p>
+</li>
+<li>
+<p><code>bash
+    ros2 topic pub &lt;topic_name&gt; &lt;msg_type&gt; '&lt;args&gt;'</code></p>
+</li>
+<li>
+<p><code>'&lt;args&gt;'</code> 参数是您将传递给主题的实际数据，</p>
+</li>
+</ul>
+<h2 id="service">service</h2>
+<ul>
+<li>服务是 ROS 图中节点间另一种通信方式。服务基于<strong>呼叫-响应</strong>模型，而非主题的发布-订阅模型。主题允许节点订阅数据流并持续获取更新，而服务<strong>仅在客户端明确调用时才提供数据。</strong></li>
+<li><span class="missing-img" title="pics/image-20260116004812298.png">🖼 [图片缺失: image-20260116004812298.png]</span></li>
+</ul>
+<p><strong>命令和操作</strong></p>
+<ul>
+<li>
+<p>list</p>
+</li>
+<li>
+<p>```bash
+    ros2 service list
+    ros2 service list -t //同时查看所有活动服务的类型</p>
+</li>
+<li>
+<p>类型</p>
+</li>
+<li>
+<p><code>ros2 service type &lt;service_name&gt;</code></p>
+</li>
+<li>
+<p>info</p>
+</li>
+<li>
+<p><code>bash 
+    ros2 service info &lt;service_name&gt;
+    ros2 service info --verbose &lt;service_name&gt;</code></p>
+</li>
+<li>
+<p>find</p>
+</li>
+<li>
+<p>```bash 
+    ros2 service find <type_name></p>
+</li>
+<li>
+<p>要查找特定类型的所有服务</p>
+</li>
+<li>
+<p>interface</p>
+</li>
+<li>
+<p><code>bash
+    ros2 interface show &lt;type_name&gt;</code></p>
+</li>
+<li>
+<p>service call </p>
+</li>
+<li>
+<p>调用服务</p>
+</li>
+<li>
+<p><code>ros2 service call &lt;service_name&gt; &lt;service_type&gt; &lt;arguments&gt;</code></p>
+</li>
+<li>
+<p>service echo</p>
+</li>
+<li>
+<p><code>bash
+    ros2 service echo &lt;service_name | service_type&gt; &lt;arguments&gt;</code></p>
+</li>
+<li></li>
+</ul>
+<h2 id="parameters">parameters</h2>
+<ul>
+<li>
+<p>parameter</p>
+</li>
+<li>
+<p>作用（配置结点）：ROS 2 中的参数与各个节点相关联。参数用于在启动时（以及运行时）配置节点，而无需更改代码。参数的生命周期与节点的生命周期绑定（尽管节点可以实现某种持久化机制，以便在重启后重新加载参数值）。</p>
+</li>
+<li>
+<p>参数的寻址方式：节点名称、节点命名空间、参数名称和参数命名空间。</p>
+<ul>
+<li>提供参数命名空间是可选的。</li>
+</ul>
+</li>
+<li>
+<p>组成： 每个参数由键、值和描述符组成</p>
+<ul>
+<li>键是字符串类型，值可以是以下类型之一： <code>bool</code> 、 <code>int64</code> 、 <code>float64</code> 、 <code>string</code> 、 <code>byte[]</code> 、 <code>bool[]</code> 、 <code>int64[]</code> 、 <code>float64[]</code> 或 <code>string[]</code> 。默认情况下，所有描述符均为空，但可以包含参数描述、值范围、类型信息和其他约束条件。</li>
+</ul>
+</li>
+<li>
+<p>参数声明</p>
+</li>
+<li>
+<p>默认情况下，节点需要<em>声明</em>其生命周期内将要接受的所有参数。这样可以在节点启动时明确定义参数的类型和名称，从而降低后续配置错误的几率</p>
+</li>
+<li>
+<p>参数类型</p>
+</li>
+<li>
+<p>预定义类型</p>
+<ul>
+<li>ParameterType.PARAMETER_INTEGER：整数（如 42）</li>
+<li>ParameterType.PARAMETER_DOUBLE：浮点数（如 3.14）</li>
+<li>ParameterType.PARAMETER_STRING：字符串（如 "hello"）</li>
+<li>ParameterType.PARAMETER_BOOL：布尔值（如 True/False）</li>
+<li>ParameterType.PARAMETER_BYTE_ARRAY：字节数组（二进制数据）</li>
+<li>还有数组形式，如整数数组 [1, 2, 3]。</li>
+</ul>
+</li>
+<li>
+<p>. 默认行为：运行时类型不可变</p>
+<ul>
+<li>默认规则：当您声明一个参数时（比如声明为整数），在节点运行期间（runtime），您不能通过工具（如 ros2 param set）或代码更改它的类型。这会失败，并报错。</li>
+</ul>
+</li>
+<li>
+<p>参数回调</p>
+</li>
+<li>
+<p>理解： “回调”（Callback）是编程中的一个常见概念，指一种函数（或方法）作为参数传递给另一个函数，当特定事件或条件发生时，被自动调用执行。简单说，它像“等电话”：提供一个“电话号码”（回调函数），当“事件”来了（如按钮点击、数据到达），系统就“打电话”给你，让你处理。</p>
+</li>
+<li>
+<p>为什么用回调？</p>
+<ul>
+<li><strong>异步处理</strong>：不阻塞主程序，等事件触发再响应（高效）</li>
+<li><strong>解耦</strong>：调用者和被调用者不需紧耦合，灵活。</li>
+<li><strong>常见场景</strong>：GUI 事件（如点击按钮）、网络请求完成、定时器到期等。</li>
+</ul>
+</li>
+<li>
+<p>三种类型</p>
+<ul>
+<li><strong>Pre-Set</strong>：参数变化<strong>之前</strong>，可以修改即将设置的值（像“预处理”）</li>
+<li><strong>Set</strong>：参数变化<strong>即将发生时</strong>，检查并可能拒绝（像“审核”）</li>
+<li><strong>Post-Set</strong>：参数变化<strong>成功后</strong>，执行反应（像“后处理”）。</li>
+</ul>
+</li>
+<li>
+<p>和参数交互：外部进程可以通过节点实例化时默认创建的参数服务执行参数操作</p>
+</li>
+</ul>
+<h2 id="actions">actions</h2>
+<ul>
+<li>动作是通信类型之一，专为长时间运行的任务而设计。它们由三部分组成：目标、反馈和结果(a goal, feedback, and a result)</li>
+<li>
+<p>Actions 使用客户端-服务器模型，类似于发布者-订阅者模型（详见主题）。“Action 客户端”节点向“Action 服务器”节点发送目标，后者确认目标并返回反馈流和结果。</p>
+</li>
+<li>
+<p><span class="missing-img" title="pics/image-20260121020016789.png">🖼 [图片缺失: image-20260121020016789.png]</span></p>
+</li>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h1 id="_12">语言库</h1>
+<h2 id="rcl">rcl</h2>
+<ul>
+<li>rcl: ros2 client lib</li>
+<li>是ros2最基础的库</li>
+<li>使用许多库都建立在rcl上，比如<ul>
+<li>rclcpp</li>
+<li>rclpy</li>
+<li>rcljava</li>
+<li>rcl...</li>
+</ul>
+</li>
+</ul>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>

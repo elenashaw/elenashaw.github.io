@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>topic</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card-bg: #ffffff; --primary: #4f46e5; --accent: #10b981;
+    --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --radius: 20px;
+  }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--text-main); line-height:1.75; }
+  .topbar { background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:white; padding:18px 24px;
+            display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .topbar a { color:white; text-decoration:none; opacity:.85; font-size:.9rem; }
+  .topbar a:hover { opacity:1; text-decoration:underline; }
+  .topbar .spacer { flex:1; }
+  .container { max-width:1000px; margin:30px auto 60px; padding:0 20px; }
+  article { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius);
+            padding:30px 36px; box-shadow:0 4px 15px rgba(0,0,0,.04); }
+  article h1 { color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:10px; }
+  article h2 { color:var(--primary); margin-top:1.6em; }
+  article h3 { margin-top:1.4em; }
+  article img { max-width:100%; border-radius:12px; border:1px solid var(--border); }
+  article code { background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:6px; font-size:.92em; }
+  article pre { background:#0f172a; color:#e2e8f0; padding:16px 20px; border-radius:12px; overflow-x:auto; }
+  article pre code { background:none; color:inherit; padding:0; }
+  article blockquote { border-left:4px solid var(--accent); background:#f0fdf4; margin:1em 0;
+                       padding:10px 18px; border-radius:0 12px 12px 0; color:var(--text-muted); }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; }
+  article th, article td { border:1px solid var(--border); padding:8px 12px; text-align:left; }
+  article th { background:#eef2ff; color:var(--primary); }
+  article a { color:var(--primary); }
+  .missing-img { background:#fef2f2; color:#b91c1c; padding:2px 10px; border-radius:8px;
+                 font-size:.85rem; border:1px dashed #fca5a5; display:inline-block; margin:2px 0; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
+  .card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px;
+          text-decoration:none; color:inherit; transition:all .3s; display:flex; flex-direction:column; gap:8px; }
+  .card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 12px 25px rgba(0,0,0,.07); }
+  .card h3 { margin:0; color:var(--primary); font-size:1.15rem; }
+  .card p { margin:0; color:var(--text-muted); font-size:.9rem; line-height:1.6; }
+  .card .meta { font-size:.78rem; color:var(--text-muted); opacity:.8; }
+  .page-title { font-size:1.6rem; font-weight:800; color:var(--primary); margin:10px 0 4px; }
+  .page-sub { color:var(--text-muted); font-size:.95rem; margin-bottom:8px; }
+  footer { text-align:center; padding:30px 20px; color:var(--text-muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">🏠 笔记首页</a>
+  <a href="index.html">← 返回上级</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/Xbomb-Note" target="_blank">📦 源仓库 Xbomb-Note</a>
+</div>
+<div class="container">
+<article>
+<h1 id="topic">topic</h1>
+<h2 id="_1">命令查看主题</h2>
+<ul>
+<li>
+<p><code>ros2 topic list</code></p>
+</li>
+<li>
+<p>示例</p>
+<ul>
+<li>
+<p>不运行任何节点时, 输出</p>
+</li>
+<li>
+<p><code>bash
+    /parameter_events
+    /rosout</code></p>
+</li>
+<li>
+<p>运行节点</p>
+</li>
+<li>
+<p><code>bash
+    ros2 run my_py_pkg robot_news_station</code></p>
+</li>
+<li>
+<p><code>bash
+    #输出
+    arameter_events
+    /robot_news
+    /rosout</code></p>
+</li>
+<li>
+<p>终止节点后，输出</p>
+</li>
+<li>
+<p><code>bash
+    /parameter_events
+    /rosout</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>至少有一个订阅者或者发布者节点运行的时候，才会在节点里看到这个主题</p>
+</li>
+<li>
+<p><code>ros2 topic info /topic_name</code></p>
+</li>
+<li>
+<p>输出</p>
+<ul>
+<li>```bash
+  username:~$ ros2 topic info /robot_news
+  Type: example_interfaces/msg/String
+  Publisher count: 1
+  Subscription count: 0</li>
+</ul>
+<p>```</p>
+<ul>
+<li>
+<p>消息类型</p>
+</li>
+<li>
+<p>发布者数量</p>
+</li>
+<li>
+<p>订阅者数量</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>ros2 topic echo /topic_name</code></p>
+</li>
+<li>收到来自发布者的信息</li>
+<li>
+<p>继续运行<code>ros2 topic info /topic_name</code></p>
+<ul>
+<li>订阅者数量增加</li>
+</ul>
+</li>
+<li>
+<p><code>ros2 interface show example_interfaces/msg/String</code></p>
+</li>
+<li>
+<p>可以查看接口的详细信息</p>
+</li>
+<li>
+<p>```bash
+    username:~$ ros2 interface show example_interfaces/msg/String
+    # This is an example message of using a primitive datatype, string.
+    # If you want to test with this that's fine, but if you are deploying
+    # it into a system you should create a semantically meaningful message type.
+    # If you want to embed it in another message, use the primitive data type instead.
+    string data  #a string datatype with a name:data</p>
+<p>```</p>
+</li>
+<li>
+<p><code>ros2 topic hz /topic_name</code></p>
+</li>
+<li>
+<p>查看主题发送的频率： Hertz</p>
+</li>
+<li>
+<p>```bash
+    #取一行结果
+    average rate: 2.000
+        min: 0.499s max: 0.501s std dev: 0.00034s window: 136</p>
+<p>```</p>
+</li>
+<li>
+<p>average rate:单位是赫兹</p>
+</li>
+<li>
+<p><code>ros2 topic bw /topic_name</code></p>
+</li>
+<li>
+<p>bandwidth</p>
+</li>
+<li>
+<p><code>ros2 topic pub -r 5 /robot_news example_interfaces/msg/String "data: 'hello from the terminal'"</code></p>
+</li>
+<li>
+<p><code>pub</code>: publisher</p>
+</li>
+<li><code>-r</code> :rate</li>
+<li><code>5</code>: 5 hz</li>
+<li>从终端</li>
+</ul>
+<h2 id="remap-at-runtime">remap at runtime</h2>
+<h3 id="rename-a-node">rename a node</h3>
+<ul>
+<li>
+<p><code>ros2 run my_py_pkg robot_news_station --ros-args -r __node:=my_station</code></p>
+</li>
+<li>
+<p><code>--ros-args</code>: 表明后面的参数不是自定义</p>
+</li>
+<li><code>-r</code>:  remap</li>
+<li>也可以写成<code>--remap</code></li>
+<li><code>__node:=my_station</code></li>
+<li><code>__node</code>: 变量:节点自己 的名字</li>
+<li><code>:=</code>:重映射赋值</li>
+<li>作用:启动节点并且修改其节点名称</li>
+<li>注意:这种修改不是永久的,下一次用<code>ros2 run my_py_pkg robot_news_station</code>, 节点名称仍然是<code>robot_news_station</code></li>
+</ul>
+<h3 id="renameremap-a-topic-of-a-publisher">rename/remap a topic of a publisher</h3>
+<p><code>ros2 run my_py_pkg robot_news_station --ros-args -r __node:=my_station -r robot_news:=abc</code></p>
+<ul>
+<li>主题名字修改</li>
+<li>启动原来<code>robot_news</code>主题对应的订阅者</li>
+<li><code>ros2 run my_py_pkg smartphone</code></li>
+<li>结果: 啥也没收到</li>
+<li>查看topic list:</li>
+<li><code>ros2 topic list</code></li>
+<li>结果: 多了两个主题<code>robot_news</code>, <code>abc</code></li>
+</ul>
+<h3 id="renameremap-a-topic-of-a-subscriber">rename/remap a topic of a subscriber</h3>
+<p><code>ros2 run my_py_pkg smartphone --ros-args -r robot_news:=abc</code></p>
+<ul>
+<li>就可以正常接收publisher的信息了</li>
+</ul>
+<h2 id="rqtrqt_graph">rqt/rqt_graph</h2>
+<h3 id="_2">显示选项</h3>
+<ul>
+<li>
+<p>group: 如果你有命名空间（Namespace），它会把属于同一个组的节点框在一起</p>
+</li>
+<li>
+<p>hide</p>
+</li>
+<li>
+<p>Debug：隐藏掉系统自带的调试信息（通常建议勾选</p>
+</li>
+<li>Leaf topics: 只有发布, 没有被订阅的话题</li>
+<li>Unreachable: 隐藏和主网络断开连接的部分</li>
+<li>Dead sinks:  自己运行、不跟别人发消息也不收消息的“孤岛”节点</li>
+</ul>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw · Powered by Xbomb-Note</footer>
+</body>
+</html>
