@@ -3,26 +3,6 @@
 ━━ 08-17 ━━
 【Today ToDo】
 　· 指令集学习整理思维导图(2h)， / 计算机网络习题(1h)，BST学习(2h)， / 数学改微分方程(2h)， 数学复习概率论第二章(1.5h，数学大题练习(1h), / 英语阅读(0.5h)， 英语单词(20mjn)， / 政治思维导图(0.5h)， 政治选择题(40min)
-【Learn】
-　· input
-　　· 408
-　　· 数学
-　　· 英语
-　　· 政治
-　· output
-　　· 408
-　　· 数学
-　　· 英语
-　　· 政治
-　· to solve
-【Mindset】
-　· Self-Insight
-　· Feel Grateful to
-　· Biggest Trouble
-　· Wisdom
-【energy track】
-　· 精力损耗
-　· 精力峰值
 
 ━━ 08-16 ━━
 【Today ToDo】
@@ -57,23 +37,11 @@
 　　　　　· 梯度为0向量
 　　　· 随机事件和概率
 　　　　· 记忆宫殿
-　　· 英语
-　　· 政治
-　· output
-　　· 408
-　　· 数学
-　　· 英语
-　　· 政治
 【Mindset】
 　· Self-Insight
 　　· 在我迷迷糊糊要睡着的时候， / 脑子里出现了很多奇怪的想法， / 但是现在是补录的时候，又忘了
 　· Feel Grateful to
 　　· 姑姑请我吃贵州酸汤和烙锅
-　· Biggest Trouble
-　· Wisdom
-【energy track】
-　· 精力损耗
-　· 精力峰值
 
 ━━ 08-07 ━━
 【Today ToDo】
@@ -165,20 +133,3 @@
 　　　　　　· Double
 　　　　　　· 8
 　　　　　　· 双精度
-　　· 数学
-　　· 英语
-　　· 政治
-　· output
-　　· 408
-　　· 数学
-　　· 英语
-　　· 政治
-　· to solve
-【Mindset】
-　· Self-Insight
-　· Feel Grateful to
-　· Biggest Trouble
-　· Wisdom
-【energy track】
-　· 精力损耗
-　· 精力峰值
