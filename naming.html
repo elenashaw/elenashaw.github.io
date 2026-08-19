@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>命名规范 · Liz's Space</title>
+<style>
+  :root {
+    --text-main: #1f2328; --text-muted: #59636e; --border: #d0d7de;
+    --link: #0969da; --code-bg: #f6f8fa; --radius: 6px;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Roboto,sans-serif;
+         background:#fff; color:var(--text-main); line-height:1.7; }
+  nav { border-bottom:1px solid var(--border); padding:14px 24px;
+        display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+  nav a { color:var(--text-main); text-decoration:none; font-size:.92rem; }
+  nav a:hover { color:var(--link); text-decoration:underline; }
+  nav .brand { font-weight:600; }
+  nav .spacer { flex:1; }
+  .container { max-width:860px; margin:0 auto; padding:40px 20px 20px; }
+  header h1 { font-size:2rem; font-weight:700; margin:0 0 10px; letter-spacing:-0.5px; }
+  header .intro { color:var(--text-muted); font-size:1.02rem; max-width:620px; margin:0 0 22px; }
+  .links { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:36px; }
+  .links a { color:var(--link); text-decoration:none; font-size:.95rem; }
+  .links a:hover { text-decoration:underline; }
+  h2.section { font-size:1.2rem; font-weight:600; margin:36px 0 14px; padding-bottom:6px; border-bottom:1px solid #eaeef2; }
+  /* Journal 区块 */
+  .journal-list { display:flex; flex-direction:column; gap:0; border:1px solid var(--border); border-radius:var(--radius); }
+  .journal-day { padding:14px 18px; border-bottom:1px solid #eaeef2; }
+  .journal-day:last-child { border-bottom:none; }
+  .journal-day .date { font-size:.8rem; color:var(--text-muted); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; margin-bottom:6px; }
+  .journal-day .title { font-weight:600; font-size:.95rem; margin-bottom:4px; }
+  .journal-day .body { font-size:.88rem; color:var(--text-muted); line-height:1.65; }
+  .journal-day .body .topic { color:var(--text-main); }
+  .journal-more { margin-top:10px; font-size:.88rem; }
+  /* 卡片区 */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+  .card { border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px;
+          text-decoration:none; color:inherit; display:flex; flex-direction:column; gap:6px;
+          transition:border-color .15s; }
+  .card:hover { border-color:var(--link); }
+  .card h3 { margin:0; font-size:1.02rem; font-weight:600; }
+  .card p { margin:0; color:var(--text-muted); font-size:.86rem; line-height:1.6; }
+  .missing-img { background:#f6f8fa; color:#59636e; padding:2px 10px; border-radius:4px;
+                 font-size:.85rem; border:1px dashed #d0d7de; display:inline-block; margin:2px 0; }
+  article { border:1px solid var(--border); border-radius:var(--radius); padding:24px 28px; }
+  article h1 { border-bottom:1px solid var(--border); padding-bottom:8px; font-size:1.5rem; }
+  article h2 { margin-top:1.5em; padding-bottom:5px; border-bottom:1px solid #eaeef2; }
+  article code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:.9em; }
+  article pre { background:#f6f8fa; border:1px solid var(--border); padding:12px 16px; border-radius:var(--radius); overflow-x:auto; }
+  article pre code { background:none; padding:0; }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; font-size:.92rem; }
+  article th, article td { border:1px solid var(--border); padding:6px 12px; text-align:left; }
+  article th { background:#f6f8fa; }
+  footer { text-align:center; padding:32px 20px; color:var(--text-muted); font-size:.85rem; border-top:1px solid #eaeef2; margin-top:40px; }
+  @media (max-width:640px) { .container { padding-top:28px; } header h1 { font-size:1.6rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">Liz's Space</span>
+  <a href="index.html">首页</a>
+  <a href="course/index.html">课程笔记</a>
+  <a href="projects.html">项目</a>
+  <span class="spacer"></span>
+  <a href="https://github.com/liz-shaw/liz-shaw" target="_blank">源文件</a>
+</nav>
+<div class="container">
+<h1 style="font-size:1.6rem;font-weight:700;margin:0 0 6px;">命名规范</h1>
+<div style="color:var(--text-muted);font-size:.9rem;margin-bottom:24px;">来自 GitHub 主页仓库 liz-shaw/liz-shaw 的 readme.md</div>
+<article>
+<h1 id="file-naming-conventions">File Naming Conventions</h1>
+<h2 id="naming">Naming</h2>
+<h3 id="files-created-by-myself">Files Created by Myself</h3>
+<ul>
+<li>
+<p>Use the general format: <code>Name1-Name2-Name3-Suffix</code></p>
+</li>
+<li>
+<p>e.g. </p>
+<p><code>bash
+Computer-Vision-Note</code></p>
+</li>
+<li>
+<p>If there are widely accepted abbreviations, they can be used. Abbreviations with unclear meaning are <strong>not allowed</strong>.</p>
+</li>
+<li>
+<p>e.g.</p>
+<ul>
+<li><code>CS</code> for <code>Computer Science</code>: allowed</li>
+<li><code>PaS</code> for <code>Probability and Statistics</code>:  prohibited</li>
+</ul>
+</li>
+<li>
+<p>Prepositions should <strong>not be capitalized</strong>.</p>
+</li>
+</ul>
+<h3 id="forked-files">Forked Files</h3>
+<ul>
+<li>Keep the original file names as they are.</li>
+</ul>
+<h2 id="suffix-naming">Suffix naming</h2>
+<ul>
+<li><code>Note</code>: Notes file</li>
+<li><code>AINote</code>: Notes primarily generated by AI </li>
+<li><code>Project</code>: Engineering or project code files</li>
+<li><code>Practice</code>:  Homework exercises or tutorial practice</li>
+<li><code>Reimplement</code>: Reimplementation of papers or projects</li>
+<li><code>MyLib</code>:  Materials mainly collected or translated from external sources (not original work)</li>
+</ul>
+<h1 id="separator">Separator</h1>
+<h2 id="repository-names">Repository Names</h2>
+<ul>
+<li><code>-</code> is <strong>preferred</strong> as the separator.</li>
+<li><code>_</code> can be used as a secondary option.</li>
+<li><code>I</code> or <code>l</code> may be used as compound suffix separators <strong>only in private repositories</strong>.</li>
+<li>e.g.: <code>Stoa-NoteIMyLib</code></li>
+</ul>
+<p>## Directory Names</p>
+<blockquote>
+<p>Still under consideration.</p>
+</blockquote>
+</article>
+</div>
+<footer>© 2026 · Liz Shaw</footer>
+</body>
+</html>

@@ -3,285 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elena's Space</title>
+  <title>Liz's Space</title>
   <style>
-    :root {
-      --text-main: #1f2328;
-      --text-muted: #59636e;
-      --border: #d0d7de;
-      --link: #0969da;
-      --code-bg: #f6f8fa;
-      --radius: 6px;
-    }
 
-    * { box-sizing: border-box; }
+  :root {
+    --text-main: #1f2328; --text-muted: #59636e; --border: #d0d7de;
+    --link: #0969da; --code-bg: #f6f8fa; --radius: 6px;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Roboto,sans-serif;
+         background:#fff; color:var(--text-main); line-height:1.7; }
+  nav { border-bottom:1px solid var(--border); padding:14px 24px;
+        display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+  nav a { color:var(--text-main); text-decoration:none; font-size:.92rem; }
+  nav a:hover { color:var(--link); text-decoration:underline; }
+  nav .brand { font-weight:600; }
+  nav .spacer { flex:1; }
+  .container { max-width:860px; margin:0 auto; padding:40px 20px 20px; }
+  header h1 { font-size:2rem; font-weight:700; margin:0 0 10px; letter-spacing:-0.5px; }
+  header .intro { color:var(--text-muted); font-size:1.02rem; max-width:620px; margin:0 0 22px; }
+  .links { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:36px; }
+  .links a { color:var(--link); text-decoration:none; font-size:.95rem; }
+  .links a:hover { text-decoration:underline; }
+  h2.section { font-size:1.2rem; font-weight:600; margin:36px 0 14px; padding-bottom:6px; border-bottom:1px solid #eaeef2; }
+  /* Journal 区块 */
+  .journal-list { display:flex; flex-direction:column; gap:0; border:1px solid var(--border); border-radius:var(--radius); }
+  .journal-day { padding:14px 18px; border-bottom:1px solid #eaeef2; }
+  .journal-day:last-child { border-bottom:none; }
+  .journal-day .date { font-size:.8rem; color:var(--text-muted); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; margin-bottom:6px; }
+  .journal-day .title { font-weight:600; font-size:.95rem; margin-bottom:4px; }
+  .journal-day .body { font-size:.88rem; color:var(--text-muted); line-height:1.65; }
+  .journal-day .body .topic { color:var(--text-main); }
+  .journal-more { margin-top:10px; font-size:.88rem; }
+  /* 卡片区 */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+  .card { border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px;
+          text-decoration:none; color:inherit; display:flex; flex-direction:column; gap:6px;
+          transition:border-color .15s; }
+  .card:hover { border-color:var(--link); }
+  .card h3 { margin:0; font-size:1.02rem; font-weight:600; }
+  .card p { margin:0; color:var(--text-muted); font-size:.86rem; line-height:1.6; }
+  .missing-img { background:#f6f8fa; color:#59636e; padding:2px 10px; border-radius:4px;
+                 font-size:.85rem; border:1px dashed #d0d7de; display:inline-block; margin:2px 0; }
+  article { border:1px solid var(--border); border-radius:var(--radius); padding:24px 28px; }
+  article h1 { border-bottom:1px solid var(--border); padding-bottom:8px; font-size:1.5rem; }
+  article h2 { margin-top:1.5em; padding-bottom:5px; border-bottom:1px solid #eaeef2; }
+  article code { background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:.9em; }
+  article pre { background:#f6f8fa; border:1px solid var(--border); padding:12px 16px; border-radius:var(--radius); overflow-x:auto; }
+  article pre code { background:none; padding:0; }
+  article table { border-collapse:collapse; width:100%; margin:1em 0; font-size:.92rem; }
+  article th, article td { border:1px solid var(--border); padding:6px 12px; text-align:left; }
+  article th { background:#f6f8fa; }
+  footer { text-align:center; padding:32px 20px; color:var(--text-muted); font-size:.85rem; border-top:1px solid #eaeef2; margin-top:40px; }
+  @media (max-width:640px) { .container { padding-top:28px; } header h1 { font-size:1.6rem; } }
 
-    body {
-      margin: 0; padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Roboto, sans-serif;
-      background: #fff; color: var(--text-main);
-      line-height: 1.7;
-    }
-
-    /* 顶部导航：白底细线，朴素 */
-    nav {
-      border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
-      display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
-    }
-    nav a { color: var(--text-main); text-decoration: none; font-size: .92rem; }
-    nav a:hover { color: var(--link); text-decoration: underline; }
-    nav .brand { font-weight: 600; }
-    nav .spacer { flex: 1; }
-
-    .container { max-width: 860px; margin: 0 auto; padding: 48px 20px 20px; }
-
-    /* 头部：大字标题，无渐变 */
-    header h1 { font-size: 2.2rem; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.5px; }
-    header .intro { color: var(--text-muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 28px; }
-
-    .links { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
-    .links a { color: var(--link); text-decoration: none; font-size: .95rem; }
-    .links a:hover { text-decoration: underline; }
-
-    /* 更新面板：白底细边框，无毛玻璃 */
-    .panel {
-      border: 1px solid var(--border); border-radius: var(--radius);
-      margin-bottom: 40px;
-    }
-    .panel-header {
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid var(--border); padding: 10px 16px;
-    }
-    .tabs { display: flex; gap: 18px; }
-    .tab-btn {
-      background: none; border: none; color: var(--text-muted); cursor: pointer;
-      font-size: .9rem; padding: 4px 0; font-family: inherit;
-    }
-    .tab-btn.active { color: var(--text-main); font-weight: 600; border-bottom: 2px solid var(--text-main); }
-    #display-date { font-size: .78rem; color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-    .panel-body { padding: 14px 18px; min-height: 120px; }
-    .update-list { display: flex; flex-direction: column; gap: 8px; }
-    .update-item { font-size: .92rem; line-height: 1.6; color: var(--text-main); padding-left: 14px; position: relative; }
-    .update-item::before { content: "-"; position: absolute; left: 0; color: var(--text-muted); }
-    .history-footer { text-align: right; padding: 0 16px 12px; }
-    .history-link { color: var(--text-muted); font-size: .8rem; text-decoration: none; cursor: pointer; }
-    .history-link:hover { color: var(--link); text-decoration: underline; }
-
-    /* 卡片区：细边框小圆角，无阴影无悬浮 */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px; }
-    .card {
-      border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 18px 20px; text-decoration: none; color: inherit;
-      display: flex; flex-direction: column; gap: 8px;
-      transition: border-color .15s;
-    }
-    .card:hover { border-color: var(--link); }
-    .card h3 { margin: 0; font-size: 1.05rem; font-weight: 600; }
-    .card p { margin: 0; color: var(--text-muted); font-size: .88rem; line-height: 1.6; }
-
-    /* 弹窗 */
-    #history-modal {
-      display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(31, 35, 40, 0.5);
-      justify-content: center; align-items: center;
-    }
-    .modal-content {
-      background: #fff; color: var(--text-main); padding: 24px 28px;
-      border-radius: var(--radius); border: 1px solid var(--border);
-      width: 90%; max-width: 480px; max-height: 75vh; overflow-y: auto; position: relative;
-    }
-    .close-modal { position: absolute; top: 12px; right: 16px; cursor: pointer; font-size: 1.4rem; color: var(--text-muted); }
-    .modal-content h2 { margin-top: 0; font-size: 1.2rem; }
-    .modal-content ul { padding-left: 20px; margin: 6px 0; font-size: .92rem; line-height: 1.7; }
-    .email-display-box { text-align: center; padding: 10px 0; }
-    .email-address {
-      font-size: 1.05rem; color: var(--text-main); background: var(--code-bg);
-      padding: 10px 14px; border-radius: var(--radius); display: inline-block;
-      margin: 14px 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      border: 1px solid var(--border);
-    }
-    .email-display-box button {
-      margin-top: 12px; background: var(--text-main); color: #fff; border: none;
-      padding: 8px 24px; border-radius: var(--radius); cursor: pointer; font-family: inherit; font-size: .9rem;
-    }
-    .email-display-box button:hover { background: #32383f; }
-
-    footer {
-      text-align: center; padding: 32px 20px; color: var(--text-muted);
-      font-size: .85rem; border-top: 1px solid #eaeef2;
-    }
-
-    @media (max-width: 640px) {
-      .container { padding-top: 32px; }
-      header h1 { font-size: 1.7rem; }
-    }
   </style>
 </head>
 <body>
-
   <nav>
-    <span class="brand">Elena's Space</span>
-    <a href="/course/index.html">课程笔记</a>
-    <a href="/projects.html">项目</a>
+    <span class="brand">Liz's Space</span>
+    <a href="course/index.html">课程笔记</a>
+    <a href="projects.html">项目</a>
+    <a href="naming.html">命名规范</a>
     <span class="spacer"></span>
     <a href="https://github.com/liz-shaw" target="_blank">GitHub</a>
   </nav>
 
   <div class="container">
     <header>
-      <h1>Elena's Space</h1>
+      <h1>Liz's Space</h1>
       <p class="intro">课程学习、算法题解、论文研读、项目实践与阅读思考的系统化笔记。</p>
       <div class="links">
         <a href="https://github.com/liz-shaw" target="_blank">github.com/liz-shaw</a>
-        <a onclick="openEmailModal()" style="cursor:pointer">email</a>
+        <a href="mailto:eleadrwhitmore@gmail.com">email</a>
         <a href="/projects.html">projects</a>
       </div>
-      <div id="hitokoto-container"></div>
     </header>
 
-    <div class="panel">
-      <div class="panel-header">
-        <div class="tabs">
-          <button class="tab-btn active" id="btn-log" onclick="switchTab('log')">最近更新</button>
-          <button class="tab-btn" id="btn-plan" onclick="switchTab('plan')">维护计划</button>
-        </div>
-        <span id="display-date">Loading...</span>
-      </div>
-      <div class="panel-body">
-        <div id="content-list" class="update-list"></div>
-      </div>
-      <div class="history-footer">
-        <a class="history-link" id="history-entry" onclick="handleHistoryClick()">查看历史 →</a>
-      </div>
+    <h2 class="section">Journal · 每日记录</h2>
+    <div class="journal-list">
+      <div class="journal-day"><div class="date">2026-08-17</div><div class="title">Daily Learned</div><div class="body"><div>计划: 指令集学习整理思维导图(2h)， / 计算机网络习题(1h)，BST学习(2h)， / 数学改微分方程(2h)， 数学复习概率论第二章(1.5h，数学大题练习(1h), / 英语阅读(0.5h)， 英语单词(20mjn)， / 政治思维导图(0.5h)， 政治选择题(40min)</div><div class="topic">学习: 408；数学；英语；政治</div></div></div><div class="journal-day"><div class="date">2026-08-16</div><div class="title">Daily Learned</div><div class="body"><div>计划: 指令集学习整理思维导图(2h)， / 计算机网络习题(1h)，BST学习(2h)， / 数学改微分方程(2h)， / 数学复习概率论第一章，英语阅读(0.5h)， / 英语单词(20mjn)，政治思维导图(0.5h)， / 政治选择题(40min)</div><div class="topic">学习: 408 — 树, 直接删了上移；数学 — 约束条件移到等号一边形成0, 求偏导全部等于0；英语；政治</div><div>记录: 在我迷迷糊糊要睡着的时候， 脑子里出现了很多奇怪的想法， 但是现在是补录的时候，又忘了；姑姑请我吃贵州酸汤和烙锅</div></div></div><div class="journal-day"><div class="date">2026-08-07</div><div class="title">Daily Learned</div><div class="body"><div>计划: 专业课: 完成数据的表示和运算， / 完成BST全部知识点复习和题目，一篇英语阅读，背单词， / 政治马原，完成数学主动回忆，微分方程改题，积分章节复习</div><div class="topic">学习: 408 — 同号相加不肯可能变号, 正数前面补0；数学；英语；政治</div></div></div><div class="journal-day"><div class="date">2026-07-11</div><div class="title">Daily Learned</div><div class="body"><div>计划: 修改之前做的多元微分880， / 修改昨天做的曲线曲面积分并且总结笔记， / 物理层词条库，传输层PPT复习， / 英语单词，马原框架， / 英语阅读1篇，德语</div><div class="topic">学习: 408；数学；英语；政治</div></div></div><div class="journal-day"><div class="date">2026-07-10</div><div class="title">Daily Learned</div><div class="body"><div>计划: 数学多元微分改答案，做曲线曲面积分题， / 计算机网络物理层词条库， / 计算机网络传输层复习PPT，英语一篇阅读， / 马原继续，德语</div><div class="topic">学习: 408；数学；英语；政治</div></div></div>
+    </div>
+    <div class="journal-more">
+      <a href="https://github.com/liz-shaw/daily-active-recall" target="_blank">查看全部日志 →</a>
     </div>
 
+    <h2 class="section">笔记与项目</h2>
     <div class="card-grid">
-      <a href="/course/index.html" class="card">
-        <h3>课程笔记</h3>
-        <p>Xbomb 笔记库：AI/ML、编程基础、机械能源、机器人四大方向 38 篇系统化笔记。</p>
-      </a>
+      <a href="/course/index.html" class="card"><h3>课程笔记</h3><p>Xbomb 笔记库：AI/ML、编程基础、机械能源、机器人四大方向 38 篇系统化笔记。</p></a>
       <a href="/course/CodingBasics/Leetcode/index.html" class="card"><h3>LeetCode</h3><p>算法题解与解题范式：环形链表、贪心、快慢指针等典型题型。</p></a>
       <a href="/course/AI-ML-DL-RL/index.html" class="card"><h3>AI / ML / DL</h3><p>深度学习、GPU 与强化学习方向的笔记与主题整理。</p></a>
       <a href="/course/ME/index.html" class="card"><h3>机械与能源</h3><p>传热学、流体力学、燃烧学、工程材料的课程笔记。</p></a>
       <a href="/course/ROBOTICS/index.html" class="card"><h3>机器人</h3><p>ROS2 基础入门、工具介绍与强化学习笔记。</p></a>
       <a href="/projects.html" class="card"><h3>项目展示</h3><p>个人项目与实践：番茄钟、拍照翻译、ROS2、深度学习复现等。</p></a>
+      <a href="/naming.html" class="card"><h3>命名规范</h3><p>文件与仓库命名约定（来自 GitHub 主页仓库）。</p></a>
     </div>
   </div>
 
-  <div id="history-modal" onclick="closeHistory()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <span class="close-modal" onclick="closeHistory()">×</span>
-      <div id="modal-body"></div>
-    </div>
-  </div>
-
-  <footer>© 2026 · Elena Shaw</footer>
-
-  <script src="./js/update.js"></script>
-  <script src="./js/current.js"></script>
-  <script src="./js/quote.js"></script>
-
-  <script>
-    let currentTab = 'log';
-
-    function switchTab(type) {
-      currentTab = type;
-      const btnLog = document.getElementById('btn-log');
-      const btnPlan = document.getElementById('btn-plan');
-      if(btnLog) btnLog.classList.toggle('active', type === 'log');
-      if(btnPlan) btnPlan.classList.toggle('active', type === 'plan');
-      renderContent();
-    }
-
-    function renderContent() {
-      const listContainer = document.getElementById('content-list');
-      const dateLabel = document.getElementById('display-date');
-      if (!listContainer || !dateLabel) return false;
-
-      const historyData = (window.siteHistory && window.siteHistory.length > 0) ? window.siteHistory[0] : null;
-      const planData = (window.maintenancePlans && window.maintenancePlans.length > 0) ? window.maintenancePlans[0] : null;
-
-      if (currentTab === 'log' && historyData) {
-          dateLabel.innerText = historyData.date;
-          listContainer.innerHTML = historyData.logs.map(item => `<div class="update-item">${item}</div>`).join('');
-          return true;
-      } else if (currentTab === 'plan' && planData) {
-          dateLabel.innerText = planData.date;
-          listContainer.innerHTML = planData.plans.map(item => `<div class="update-item">${item}</div>`).join('');
-          return true;
-      }
-      return false;
-    }
-
-    function handleHistoryClick() {
-      if (currentTab === 'log') { openHistory(); } else { openPlanHistory(); }
-    }
-
-    function openHistory() {
-      const modal = document.getElementById('history-modal');
-      const body = document.getElementById('modal-body');
-      if(!modal || !body) return;
-      modal.style.display = 'flex';
-      body.innerHTML = `<h2>历史足迹</h2>` +
-        (window.siteHistory || []).map(entry => `
-          <div style="margin-bottom:16px; border-bottom:1px solid #eaeef2; padding-bottom:10px;">
-            <div style="font-weight:600; color:var(--text-muted); font-size:.8rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">${entry.date}</div>
-            <ul>${entry.logs.map(log => `<li>${log}</li>`).join('')}</ul>
-          </div>
-        `).join('');
-    }
-
-    function openPlanHistory() {
-      const modal = document.getElementById('history-modal');
-      const body = document.getElementById('modal-body');
-      if(!modal || !body) return;
-      modal.style.display = 'flex';
-      body.innerHTML = `<h2>维护计划回顾</h2>` +
-        (window.maintenancePlans || []).map(entry => `
-          <div style="margin-bottom:16px; border-bottom:1px solid #eaeef2; padding-bottom:10px;">
-            <div style="font-weight:600; color:var(--text-muted); font-size:.8rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">${entry.date}</div>
-            <ul>${entry.plans.map(plan => `<li>${plan}</li>`).join('')}</ul>
-          </div>
-        `).join('');
-    }
-
-    function openEmailModal() {
-      const modal = document.getElementById('history-modal');
-      const body = document.getElementById('modal-body');
-      if(!modal || !body) return;
-      modal.style.display = 'flex';
-      body.innerHTML = `
-        <div class="email-display-box">
-          <h3 style="margin:0;">联系邮箱</h3>
-          <div class="email-address">eleadrwhitmore@gmail.com</div>
-          <p style="color:var(--text-muted); font-size:.85rem; margin:0 0 8px;">欢迎通过邮件交流合作</p>
-          <button onclick="closeHistory()">好的</button>
-        </div>
-      `;
-    }
-
-    function closeHistory() {
-      const modal = document.getElementById('history-modal');
-      if(modal) modal.style.display = 'none';
-    }
-
-    function startApp() {
-      let retryCount = 0;
-      const retryInterval = setInterval(() => {
-        const rendered = renderContent();
-        if (rendered || retryCount > 10) clearInterval(retryInterval);
-        retryCount++;
-      }, 500);
-      if (typeof loadHitokoto === 'function') loadHitokoto();
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', startApp);
-    } else {
-      startApp();
-    }
-    window.addEventListener('load', renderContent);
-  </script>
+  <footer>© 2026 · Liz Shaw</footer>
 </body>
 </html>
